@@ -1,0 +1,7 @@
+*.o
+*.dYSM
+*.exe
+.DSS
+*.out
+.DS_Store
+.vscod*
