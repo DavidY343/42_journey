@@ -16,4 +16,7 @@
 #include <stdarg.h>
 #include "libft/libft.h"
 
+int	ft_type(const char str, va_list args);
+int	ft_printf(const char *string, ...);
+
 #endif
