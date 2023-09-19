@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dyanez-m <dyanez-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:23:33 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/09/18 13:05:18 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/09/19 12:45:28 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ int	ft_type(const char str, va_list args)
 
 	len = 0;
 	if (str == 'c')
-		len += ft_printchar(va_arg(args, int));
+		len += ft_putchar(va_arg(args, int));
 	else if (str == 's')
 		len += ft_printstr(va_arg(args, char *));
 	else if (str == 'p')
-		len += ft_print_ptr(va_arg(args, unsigned long long));
+		len += ft_print_ptr(va_arg(args, void *));
 	else if (str == 'd' || str == 'i')
 		len += ft_printnbr(va_arg(args, int));
 	else if (str == 'u')
