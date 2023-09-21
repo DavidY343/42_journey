@@ -36,27 +36,10 @@ static int	ft_len_base(int n, int base_len)
 
 int	ft_putnbr_c(int n)
 {
-	char	digit;
+	char	*digit;
 	int		len;
 
 	len = ft_len_base(n, 10);
-	if (n == -2147483648)
-		write(1, "-2147483648", 11);
-	else if (n > 9)
-	{
-		ft_putnbr_c(n / 10);
-		ft_putnbr_c(n % 10);
-	}
-	else if (n < 0)
-	{
-		write(1, "-", 1);
-		n = -n;
-		ft_putnbr_c(n);
-	}
-	else
-	{
-		digit = '0' + n;
-		write(1, &digit, 1);
-	}
+	digit = ft_itoa(n);
 	return (len);
 }
