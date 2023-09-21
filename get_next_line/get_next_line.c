@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dyanez-m <dyanez-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 15:32:45 by david             #+#    #+#             */
-/*   Updated: 2023/09/20 18:42:42 by david            ###   ########.fr       */
+/*   Updated: 2023/09/21 08:56:21 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ char	*ft_read_fd(int fd, char *preview)
 			return (0);
 		}
 		preview = ft_strjoin(preview, buffer);
+		free(buffer);
 	}
-	free(buffer);
 	return (preview);
 }
 

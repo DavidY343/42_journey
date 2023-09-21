@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dyanez-m <dyanez-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 15:33:48 by david             #+#    #+#             */
-/*   Updated: 2023/09/20 18:17:12 by david            ###   ########.fr       */
+/*   Updated: 2023/09/21 08:50:28 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char    *ft_strchr(const char *s, int c)
         int     i;
 
         i = 0;
+		if (!s)
+			return (0);
         while (s[i] != '\0')
         {
                 if (s[i] == (unsigned char)c)
