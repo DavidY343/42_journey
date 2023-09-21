@@ -6,7 +6,7 @@
 /*   By: dyanez-m <dyanez-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 15:32:45 by david             #+#    #+#             */
-/*   Updated: 2023/09/21 08:56:21 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/09/21 14:27:19 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,29 +18,30 @@ char	*ft_read_fd(int fd, char *preview)
 	char	*buffer;
 
 	bytes_read = 1;
+	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buffer)
+		return (0);
 	while (!(ft_strchr(preview, '\n')) && bytes_read != 0)
 	{
-		buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-		if (!buffer)
-			return (0);
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
-		if ((!(preview) && bytes_read == 0) || bytes_read == -1) // quizas tb para el caso final !preview && bytes_read = 0
+		if ((!(preview) && bytes_read == 0) || bytes_read == -1)
 		{
-			free(buffer);
 			free(preview);
+			free(buffer);
 			return (0);
 		}
+		buffer[bytes_read] = '\0';
 		preview = ft_strjoin(preview, buffer);
-		free(buffer);
 	}
+	free(buffer);
 	return (preview);
 }
 
 char	*ft_get_line(char *preview)
 {
-	char    *line;
+	char	*line;
 	int		i;
-	
+
 	i = 0;
 	while (preview[i] != '\0' && preview[i] != '\n')
 		i++;
@@ -54,7 +55,7 @@ char	*ft_get_line(char *preview)
 	while (preview[++i] != '\0' && preview[i] != '\n')
 		line[i] = preview[i];
 	if (preview[i] == '\n')
-	{	
+	{
 		line[i] = '\n';
 		i++;
 	}
@@ -80,27 +81,33 @@ char	*ft_situation_handler(char *preview)
 		return (0);
 	}
 	leftovers = (char *)malloc(sizeof(char) * (len_preview - i + 1));
-	while(preview[++i] != '\0')
-		leftovers[j++] = preview[i];
+	i++;
+	while (preview[i] != '\0')
+		leftovers[j++] = preview[i++];
 	leftovers[j] = '\0';
 	free(preview);
 	return (leftovers);
-
 }
 
 char	*get_next_line(int fd)
 {
 	static char	*preview;
 	char		*line;
-	
+
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-    preview = ft_read_fd(fd, preview);
+	preview = ft_read_fd(fd, preview);
 	if (!preview)
+	{
+		free(preview);
 		return (0);
+	}
 	line = ft_get_line(preview);
-	if (!line)
-		return (0);
 	preview = ft_situation_handler(preview);
+	if (!line || !*line)
+	{
+		free(line);
+		return (NULL);
+	}
 	return (line);
 }
