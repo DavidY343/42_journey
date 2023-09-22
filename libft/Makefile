@@ -13,23 +13,28 @@ CFLAGS = -Wall -Wextra -Werror
 NAME = libft.a
 
 INCLUDE = libft.h
+
+BONUS_NAME = .bonus
+
 all: $(NAME)
 
 $(NAME): $(OBJS) $(INCLUDE)
-	ar rc $(NAME) $(OBJS)
-	ranlib $(NAME)
+	ar rcs $(NAME) $(OBJS)
+
+bonus: $(BONUS_NAME)
+
+$(BONUS_NAME): $(OBJS) $(BONUSOBJS) $(INCLUDE)
+	ar rcs $(NAME) $(BONUSOBJS) $(OBJS)
+	ar rcs $(BONUS_NAME) $(BONUSOBJS) $(OBJS)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@ 
+	$(CC) $(CFLAGS) -c $< -o $@
 
-bonus: $(BONUS) $(BONUSOBJS) $(INCLUDE)
-	ar rc $(NAME) $(BONUSOBJS) $(BONUS)
-	ranlib $(NAME)
 clean:
 	rm -f $(OBJS) $(BONUSOBJS)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME) $(BONUS_NAME)
 
 re: fclean all
 

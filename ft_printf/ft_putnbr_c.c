@@ -6,7 +6,7 @@
 /*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 19:41:22 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/09/19 20:01:32 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/09/22 20:23:18 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,7 @@ int	ft_putnbr_c(int n)
 
 	len = ft_len_base(n, 10);
 	digit = ft_itoa(n);
+	ft_putstr_fd(digit, 1);
+	free(digit);
 	return (len);
 }

@@ -19,13 +19,13 @@ BONUS_NAME = .bonus
 all: $(NAME)
 
 $(NAME): $(OBJS) $(INCLUDE)
-	ar rc $(NAME) $(OBJS)
+	ar rcs $(NAME) $(OBJS)
 
 bonus: $(BONUS_NAME)
 
 $(BONUS_NAME): $(OBJS) $(BONUSOBJS) $(INCLUDE)
-	ar rc $(NAME) $(BONUSOBJS) $(OBJS)
-	ar rc $(BONUS_NAME) $(BONUSOBJS) $(OBJS)
+	ar rcs $(NAME) $(BONUSOBJS) $(OBJS)
+	ar rcs $(BONUS_NAME) $(BONUSOBJS) $(OBJS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
