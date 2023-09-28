@@ -6,15 +6,13 @@
 /*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 15:38:24 by david             #+#    #+#             */
-/*   Updated: 2023/09/27 15:40:18 by david            ###   ########.fr       */
+/*   Updated: 2023/09/28 16:25:38 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stack.h"
-#include "push_swap.h"
+#include "../includes/push_swap.h"
 
 int	main(int argc, char **argv)
 {
-	if (argc < 2)
-		
+	check_inputs(argc, argv);
 }

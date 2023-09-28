@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   swap_op.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 16:35:17 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/09/26 16:56:48 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/09/28 17:39:46 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stack.h"
+#include "../includes/push_swap.h"
 
 void	swap(t_stack **top)
 {

@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack.h                                            :+:      :+:    :+:   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/26 16:05:06 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/09/26 17:28:22 by dyanez-m         ###   ########.fr       */
+/*   Created: 2023/09/28 16:12:52 by david             #+#    #+#             */
+/*   Updated: 2023/09/28 16:24:23 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STACK_H
-# define STACK_H
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
 
 # include <unistd.h>
 # include <stdlib.h>
+# include "../libft/libft.h"
+# include "../libft/get_next_line/get_next_line.h"
+# include "../libft/ft_printf/ft_printf.h"
+
+int	check_inputs(int argc, char **argv);
 
 typedef struct s_stack
 {
