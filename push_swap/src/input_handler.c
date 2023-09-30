@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dyanez-m <dyanez-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 16:14:01 by david             #+#    #+#             */
-/*   Updated: 2023/09/28 17:59:39 by david            ###   ########.fr       */
+/*   Updated: 2023/09/30 18:07:59 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,28 +21,27 @@ int	check_num(char *str)
 		i++;
 	while (str[i] != '\0')
 	{
-		if (str[i] >= '9' || str[i] <= '0')
+		if (str[i] < '0' || str[i] > '9')
 			return (0);
 		i++;
 	}
-	if (i == ft_strlen(str))
+	if (i == (int)ft_strlen(str))
 		return (1);
 	return (0);
 }
 
-int	*check_inputs_aux(char **argv, int i)
+int	*check_inputs_aux(char **argv, int i, int *size)
 {
 	long	number;
 	int		*nbr;
 	int		j;
 
 	j = 0;
-	while(argv[i] != 0)
-		i++;
-	nbr = (int *)malloc(sizeof(int) * i);
+	while(argv[j] != 0)
+		j++;
+	nbr = (int *)malloc(sizeof(int) * j);
 	if (!nbr)
 		exit (0);
-	i = 0;
 	while (argv[i] != 0)
 	{
 		if (check_num(argv[i]) == 0)
@@ -58,30 +57,62 @@ int	*check_inputs_aux(char **argv, int i)
 			free(nbr);
 			exit (-1);
 		}
-		nbr[j] = (int)number;
+		nbr[(*size)++] = (int)number;
 		i++;
 	}
 	return (nbr);
 }
+void	check_duplicates(int *number, int size)
+{
+    int	i;
+	int	j;
 
-int	*check_inputs(int argc, char **argv)
+	i = 0;
+    while(i < size)
+	{
+        j = i + 1;
+        while(j < size)
+		{
+            if(number[i] == number[j])
+			{
+                ft_printf("Error\n");
+                free(number);
+                exit(-1);
+            }
+            j++;
+        }
+        i++;
+    }
+}
+int	*check_inputs(int argc, char **argv, int *size)
 {
 	int	*nbr;
 
 	if (argc < 2)
-	{
-		ft_printf("Error\n");
 		exit (-1);
-	}
 	else if (argc == 2)
 	{
 		argv = ft_split(argv[1], ' ');
-		nbr = check_inputs_aux(argv, 0); 
+		nbr = check_inputs_aux(argv, 0, size); 
 		free(argv);
 	}
 	else
 	{
-		nbr = check_inputs_aux(argv, 1);
+		nbr = check_inputs_aux(argv, 1, size);
 	}
+	check_duplicates(nbr, *size);
 	return (nbr);
+}
+
+void	fill_stack(t_stack **stack, int *number, int size)
+{
+
+	while (size--)
+	{
+		t_stack *node = new_node(number[size]);
+		if (!node)
+			return ;
+		node->next = *stack;
+		*stack = node;
+	}
 }

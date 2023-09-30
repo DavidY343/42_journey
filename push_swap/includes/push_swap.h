@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dyanez-m <dyanez-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 16:12:52 by david             #+#    #+#             */
-/*   Updated: 2023/09/28 16:24:23 by david            ###   ########.fr       */
+/*   Updated: 2023/09/30 19:33:28 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,29 @@
 # include "../libft/get_next_line/get_next_line.h"
 # include "../libft/ft_printf/ft_printf.h"
 
-int	check_inputs(int argc, char **argv);
-
 typedef struct s_stack
 {
 	int				n;
 	struct s_stack	*next;
 }	t_stack;
 
+// find mid
+t_stack *copy_stack(t_stack *original);
+t_stack *sorted_merge(t_stack *a, t_stack *b);
+void front_back_split(t_stack *source, t_stack **front_ref, t_stack **back_ref);
+void merge_sort(t_stack **head_ref);
+int find_middle(t_stack *head);
+int	find_mid(t_stack *stack);
+
+// input_handler
+void 	print_stack(t_stack *a);
+void	fill_stack(t_stack **stack, int *number, int size);
+int		*check_inputs(int argc, char **argv, int *size);
+int		*check_inputs_aux(char **argv, int i, int *size);
+int		check_num(char *str);
+t_stack *copy_stack(t_stack *original);
+
+// operations declarations
 t_stack	*new_node(int n);
 int		pop(t_stack **top);
 void	swap(t_stack **top);

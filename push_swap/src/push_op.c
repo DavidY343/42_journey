@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   push_op.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dyanez-m <dyanez-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 16:46:55 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/09/26 17:10:22 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/09/29 20:47:54 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stack.h"
+#include "../includes/push_swap.h"
 
 t_stack	*new_node(int n)
 {

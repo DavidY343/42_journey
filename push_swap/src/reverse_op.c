@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   reverse_op.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dyanez-m <dyanez-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 16:48:01 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/09/26 17:13:00 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/09/30 16:14:34 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stack.h"
+#include "../includes/push_swap.h"
 
 // Función para rotar los elementos de la pila hacia abajo (reverse rotate)
 void	reverse_rotate(t_stack **top)

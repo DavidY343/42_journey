@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   rotate_op.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dyanez-m <dyanez-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 17:14:34 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/09/26 17:16:36 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/09/30 16:14:31 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stack.h"
+#include "../includes/push_swap.h"
 
 // Función para rotar los elementos de la pila hacia arriba (rotate)
 void	rotate(t_stack **top)

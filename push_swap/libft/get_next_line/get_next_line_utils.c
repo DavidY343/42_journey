@@ -6,7 +6,7 @@
 /*   By: dyanez-m <dyanez-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 15:33:48 by david             #+#    #+#             */
-/*   Updated: 2023/09/21 14:07:10 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/09/30 17:38:30 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ft_strchr(const char *s, int c)
 	return (0);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin2(char *s1, char *s2)
 {
 	char	*result;
 	int		i;

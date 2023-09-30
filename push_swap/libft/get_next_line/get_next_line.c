@@ -6,7 +6,7 @@
 /*   By: dyanez-m <dyanez-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 15:32:45 by david             #+#    #+#             */
-/*   Updated: 2023/09/21 14:27:19 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/09/30 17:38:31 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*ft_read_fd(int fd, char *preview)
 			return (0);
 		}
 		buffer[bytes_read] = '\0';
-		preview = ft_strjoin(preview, buffer);
+		preview = ft_strjoin2(preview, buffer);
 	}
 	free(buffer);
 	return (preview);
