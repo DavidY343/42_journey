@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   swap_op.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 16:35:17 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/09/28 17:39:46 by david            ###   ########.fr       */
+/*   Updated: 2023/10/01 15:02:40 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,19 @@ void	swap(t_stack **top)
 
 void	sa(t_stack **a)
 {
+	ft_printf("sa\n");
 	swap(a);
 }
 
 void	sb(t_stack **b)
 {
+	ft_printf("sb\n");
 	swap(b);
 }
 
 void	ss(t_stack **a, t_stack **b)
 {
+	ft_printf("ss\n");
 	swap(a);
 	swap(b);
 }

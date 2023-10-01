@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dyanez-m <dyanez-m@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 16:14:01 by david             #+#    #+#             */
-/*   Updated: 2023/09/30 18:07:59 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/10/01 17:46:26 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ int	*check_inputs_aux(char **argv, int i, int *size)
 	int		j;
 
 	j = 0;
+	if (argv[j] == '\0' || argv[j][0] == '-')
+	{
+		ft_putendl_fd("Error", 2);
+		exit (0);
+	}
 	while(argv[j] != 0)
 		j++;
 	nbr = (int *)malloc(sizeof(int) * j);
@@ -46,16 +51,16 @@ int	*check_inputs_aux(char **argv, int i, int *size)
 	{
 		if (check_num(argv[i]) == 0)
 		{
-			ft_printf("Error\n");
+			ft_putendl_fd("Error", 2);
 			free(nbr);
-			exit (-1);
+			exit (0);
 		}
 		number = ft_atoi(argv[i]);
 		if (number > 2147483647 || number < -2147483648)
 		{
-			ft_printf("Error\n");
+			ft_putendl_fd("Error", 2);
 			free(nbr);
-			exit (-1);
+			exit (0);
 		}
 		nbr[(*size)++] = (int)number;
 		i++;
@@ -75,9 +80,9 @@ void	check_duplicates(int *number, int size)
 		{
             if(number[i] == number[j])
 			{
-                ft_printf("Error\n");
+                ft_putendl_fd("Error", 2);
                 free(number);
-                exit(-1);
+                exit(0);
             }
             j++;
         }
@@ -89,7 +94,10 @@ int	*check_inputs(int argc, char **argv, int *size)
 	int	*nbr;
 
 	if (argc < 2)
-		exit (-1);
+	{
+		ft_putendl_fd("Error", 2);
+		exit (0);
+	}
 	else if (argc == 2)
 	{
 		argv = ft_split(argv[1], ' ');
@@ -109,7 +117,7 @@ void	fill_stack(t_stack **stack, int *number, int size)
 
 	while (size--)
 	{
-		t_stack *node = new_node(number[size]);
+		t_stack *node = new_node(number[size], 0);
 		if (!node)
 			return ;
 		node->next = *stack;

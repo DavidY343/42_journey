@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   push_op.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dyanez-m <dyanez-m@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 16:46:55 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/09/29 20:47:54 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/10/01 15:01:24 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-t_stack	*new_node(int n)
+t_stack	*new_node(int n, int chunk)
 {
 	t_stack	*node;
 
@@ -21,6 +21,7 @@ t_stack	*new_node(int n)
 		return (0);
 	node->n = n;
 	node->next = NULL;
+	node->chunk = chunk;
 	return (node);
 }
 
@@ -40,11 +41,11 @@ int	pop(t_stack **top)
 }
 
 // Función para añadir un elemento a la pila (push)
-void	push(t_stack **top, int n)
+void	push(t_stack **top, int n, int chunk)
 {
 	t_stack	*node;
 
-	node = new_node(n);
+	node = new_node(n, chunk);
 	node->next = *top;
 	*top = node;
 }
@@ -54,7 +55,8 @@ void	pa(t_stack **a, t_stack **b)
 {
 	if (*b == NULL)
 		return ;
-	push(a, (*b)->n);
+	ft_printf("pa\n");
+	push(a, (*b)->n, peek_chunk(*b));
 	pop(b);
 }
 
@@ -63,6 +65,7 @@ void	pb(t_stack **a, t_stack **b)
 {
 	if (*a == NULL)
 		return ;
-	push(b, (*a)->n);
+	ft_printf("pb\n");
+	push(b, (*a)->n, peek_chunk(*a));
 	pop(a);
 }

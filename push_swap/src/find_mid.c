@@ -3,42 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   find_mid.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dyanez-m <dyanez-m@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 18:48:07 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/10/01 02:18:22 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/10/01 14:39:32 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-t_stack	*copy_stack(t_stack *original, int maxsize)
+t_stack *copy_stack(t_stack *stack, int chunk)
 {
-	t_stack *copy;
-    t_stack *copy_head;
-    t_stack *original_head;
-	
-	if (original == NULL || maxsize == 0)
-		return (NULL);
-	copy = malloc(sizeof(t_stack));
-	copy_head = copy;
-	original_head = original;
-    while (original_head != NULL && (maxsize == -1 || maxsize > 0))
-    {
-        copy->n = original_head->n;
-        if (original_head->next != NULL && (maxsize == -1 || maxsize > 1))
-        {
-            copy->next = malloc(sizeof(t_stack));
-            copy = copy->next;
-        }
-        else
-            copy->next = NULL;
-        original_head = original_head->next;
-        if (maxsize != -1)
-            maxsize--;
-    }
+	t_stack *new_stack = NULL;
+	t_stack *temp;
 
-    return copy_head;
+	while (stack != NULL)
+	{
+		if (stack->chunk == chunk)
+		{
+			temp = malloc(sizeof(t_stack));
+			if (temp == NULL)
+				return (NULL); // Si no se pudo asignar memoria, devolvemos NULL.
+			temp->n = stack->n;
+			temp->chunk = stack->chunk;
+			temp->next = new_stack;
+			new_stack = temp;
+		}
+		stack = stack->next;
+	}
+	return new_stack;
 }
 
 
@@ -116,12 +109,12 @@ int find_middle(t_stack *head)
     return slow_ptr->n;
 }
 
-int	find_mid(t_stack *stack, int maxsize)
+int	find_mid(t_stack *stack, int chunk)
 {
 	t_stack	*copy;
 	int mid_number;
 
-	copy = copy_stack(stack, maxsize);
+	copy = copy_stack(stack, chunk);
 	merge_sort(&copy);
 	mid_number = find_middle(copy);
 	free(copy);

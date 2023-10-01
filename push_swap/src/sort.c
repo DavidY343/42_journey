@@ -3,144 +3,159 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dyanez-m <dyanez-m@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 18:36:57 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/10/01 01:34:40 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/10/01 18:03:21 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
 
-int	scan_through_a(t_stack **a, t_stack **b, int mid, int size)
+int	scan_through_a(t_stack **a, t_stack **b, int mid, int chunk)
 {
-	int	counter;
-
-	counter = 0;
-	while (size)
-	{
-		if ((*a)->n < mid)
-		{
-			pb(a, b);
-			counter++;
-		}
-		else if (peekBottom(*a) < mid)
-		{
-			rra(a);
-			pb(a, b);
-			counter++;
-		}
-		else
-			ra(a);
-		size--;
-	}
-	return (counter);
-}
-
-int	*first_part(t_stack **a, t_stack **b, int log_size, int size)
-{
-	int	mid;
-	int	*chunk;
+	int	ra_uses;
+	int new_chunk;
 	int i;
 
-	i = 0;
-	chunk = (int *)malloc(sizeof(int) * log_size);
-	while (log_size > 0)
+	i = count_elements_minor(*a, chunk, mid);
+	new_chunk = 0;
+	ra_uses = 0;
+	if (*b != NULL)
+		new_chunk = peek_chunk(*b) + 1; 
+	while (peek_chunk(*a) == chunk && i)
 	{
-		mid = find_mid(*a, -1);
-		ft_printf("mid = %d\n", mid);
-		chunk[i++] = scan_through_a(a, b, mid, size);
-		log_size--;
-		print_stack(*a);
-		ft_printf("----\n");
-		print_stack(*b);
-		size /= 2;
+		if (peek_num(*a) < mid)
+		{
+			(*a)->chunk = new_chunk;
+			pb(a, b);
+			i--;
+		}
+		else
+		{
+			ra(a);
+			ra_uses++;
+		}
 	}
-	if ((*a)->n > (*a)->next->n)
-		sa(a);
-	return (chunk);
+	return (ra_uses);
 }
 
-int	move_chunk(t_stack **a, t_stack **b, int chunk_size, int mid)
+int	scan_through_b(t_stack **a, t_stack **b, int mid, int chunk)
 {
+	int	rb_uses;
+	int new_chunk;
 	int	i;
-	int	rb_count;
-	int	pa_uses;
 
-	pa_uses = 0;
-	rb_count = 0;
-	i = 0;
-	while (i < chunk_size)
+	new_chunk = 0;
+	rb_uses = 0;
+	i = count_elements_supirior(*b, chunk, mid);
+	if (*a != NULL)
+		new_chunk = peek_chunk(*a) + 1; 
+	while (peek_chunk(*b) == chunk && i)
 	{
-		if ((*b)->n > mid)
+		if (peek_num(*b) > mid)
 		{
+			(*b)->chunk = new_chunk;
 			pa(a, b);
-			i++;
-			pa_uses++;
+			i--;
 		}
 		else
 		{
 			rb(b);
-			rb_count++;
+			rb_uses++;
 		}
 	}
-	while (rb_count > 0)
-	{
-		rrb(b);
-		rb_count--;
-	}
-	return (pa_uses);
+	return (rb_uses);
 }
-
-void	second_part(t_stack **a, t_stack **b, int chunk_size)
+void first_part(t_stack **a, t_stack **b, int chunk)
 {
-	int mid;
-	int pa_uses;
-
-	if (chunk_size <= 2 || is_sorted_desc(*b, chunk_size) == 1)
+	int	mid;
+	int	ra_uses;
+	while (is_sorted_asc(*a, chunk) == 0)
 	{
-		if ((*b)->n < ((*b)->next->n))
-			sb(b);
-		pa(a, b);
-		pa(a, b);
-		if ((*a)->n > (*a)->next->n)
+		mid = find_mid(*a, chunk);
+		ra_uses = scan_through_a(a, b, mid, chunk);
+		while (ra_uses && chunk != 0)
+		{
+			rra(a);
+			ra_uses--;
+		}
+		//falta caso para dos
+		if (is_sorted_asc(*a, chunk) == 0 && count_elements(*a, chunk) == 2)
+		{
 			sa(a);
-		return ;
+		}
 	}
-	mid = find_mid(*b, chunk_size);
-	pa_uses = move_chunk(a, b, chunk_size, mid);
-	mid = find_mid(*a, pa_uses);
-	scan_through_a(a, b, mid, pa_uses);
-	print_stack(*a);
-	ft_printf("----\n");
-	print_stack(*b);
-	if (chunk_size - pa_uses <= 2 || is_sorted_desc(*b, chunk_size) == 1)
-        return ;  // Agregamos una condición de salida aquí
-	return (second_part(a, b, chunk_size - pa_uses));
 }
 
-void	sort(t_stack **a, t_stack **b, int size)
+void	second_part(t_stack **a, t_stack **b, int chunk)
 {
-	int log_size;
-	int	*chunk;
-
-	ft_printf("size = %d\n", size);
-		
-	log_size = divider(size);
-	ft_printf("log_size = %d\n", log_size);
-	chunk = first_part(a, b, log_size, size);
-	print_stack(*a);
-	ft_printf("----\n");
-	for (int i = 0; i < log_size; i++)
-		ft_printf("chunk en orden= %d\n", chunk[i]);
-	while (log_size > 0)
+	int	mid;
+	int	rb_uses;
+	while (is_sorted_desc(*b, chunk) == 0 )
 	{
-		print_stack(*b);
-		ft_printf("chunk = %d\n", chunk[log_size - 1]);
-		second_part(a, b, chunk[--log_size]);
+		
+		mid = find_mid(*b, chunk);
+		rb_uses = scan_through_b(a, b, mid, chunk);
+		while (rb_uses && chunk != 0)
+		{
+			rrb(b);
+			rb_uses--;
+		}
+		//falta caso para dos
+		if (is_sorted_desc(*b, chunk) == 0 && count_elements(*b, chunk) == 2)
+		{
+			sb(b);
+			(*b)->chunk = peek_chunk(*a) + 1;
+			pa(a, b);
+		}
 	}
-	free(chunk);
-	
+	while (is_sorted_desc(*b, chunk) == 1 && (*b) != NULL)
+	{
+		(*b)->chunk = peek_chunk(*a) + 1;
+		pa(a, b);
+	}
+}
+
+void	first_lap(t_stack **a, t_stack **b)
+{
+	int	mid;
+	int i;
+
+
+	while (is_sorted_asc(*a, 0) == 0)
+	{
+		mid = find_mid(*a, 0);
+		i = count_elements_minor(*a, 0, mid);
+		while (i && is_sorted_asc(*a, 0) == 0)
+		{
+			if (peek_num(*a) < mid)
+			{
+				pb(a, b);
+				i--;
+			}
+			else
+				ra(a);
+		}
+	}
+	if (is_sorted_asc(*a, 0) == 0 && count_elements(*a, 0) == 2)
+	{
+		sa(a);
+	}
+}
+
+void	sort(t_stack **a, t_stack **b)
+{
+	int chunk;
+
+	first_lap(a, b);
+	while (is_sorted_asc(*a, 0) == 0 || *b != NULL)
+	{
+		chunk = peek_chunk(*a);
+		first_part(a, b, chunk);
+		chunk = peek_chunk(*b);
+		second_part(a, b, chunk);
+	}
 }
 
