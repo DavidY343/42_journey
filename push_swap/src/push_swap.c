@@ -6,7 +6,7 @@
 /*   By: dyanez-m <dyanez-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 15:38:24 by david             #+#    #+#             */
-/*   Updated: 2023/09/30 19:46:04 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/10/01 01:07:12 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,12 @@ int	main(int argc, char **argv)
 
 	size = 0;
 	a = NULL;
+	b = NULL;
 	nbr = check_inputs(argc, argv, &size);
 	fill_stack(&a, nbr, size);
+	//print_stack(a);
 	sort(&a, &b, size);
+	ft_printf("0000000000000000000000\n");
 	print_stack(a);
-
 	free(nbr);
 }

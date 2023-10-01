@@ -6,23 +6,41 @@
 /*   By: dyanez-m <dyanez-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 18:48:07 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/09/30 19:33:20 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/10/01 02:18:22 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-t_stack *copy_stack(t_stack *original)
+t_stack	*copy_stack(t_stack *original, int maxsize)
 {
-    if (original == NULL) {
-        return (NULL);
+	t_stack *copy;
+    t_stack *copy_head;
+    t_stack *original_head;
+	
+	if (original == NULL || maxsize == 0)
+		return (NULL);
+	copy = malloc(sizeof(t_stack));
+	copy_head = copy;
+	original_head = original;
+    while (original_head != NULL && (maxsize == -1 || maxsize > 0))
+    {
+        copy->n = original_head->n;
+        if (original_head->next != NULL && (maxsize == -1 || maxsize > 1))
+        {
+            copy->next = malloc(sizeof(t_stack));
+            copy = copy->next;
+        }
+        else
+            copy->next = NULL;
+        original_head = original_head->next;
+        if (maxsize != -1)
+            maxsize--;
     }
 
-    t_stack *copy = malloc(sizeof(t_stack));
-    copy->n = original->n;
-    copy->next = copy_stack(original->next);
-    return copy;
+    return copy_head;
 }
+
 
 t_stack *sorted_merge(t_stack *a, t_stack *b)
 {
@@ -82,71 +100,6 @@ void merge_sort(t_stack **head_ref)
 
     *head_ref = sorted_merge(a, b);
 }
-/*
-t_stack *get_tail(t_stack *cur) {
-    while (cur != NULL && cur->next != NULL)
-        cur = cur->next;
-    return cur;
-}
-
-t_stack *partition(t_stack *head, t_stack *end, t_stack **new_head, t_stack **new_end) {
-    t_stack *pivot = end;
-    t_stack *prev = NULL, *cur = head, *tail = pivot;
-
-    while (cur != pivot) {
-        if (cur->n < pivot->n) {
-            if ((*new_head) == NULL)
-                (*new_head) = cur;
-            prev = cur;  
-            cur = cur->next;
-        } else {
-            if (prev)
-                prev->next = cur->next;
-            t_stack *tmp = cur->next;
-            cur->next = NULL;
-            tail->next = cur;
-            tail = cur;
-            cur = tmp;
-        }
-    }
-
-    if ((*new_head) == NULL)
-        (*new_head) = pivot;
-
-    (*new_end) = tail;
-
-    return pivot;
-}
-
-t_stack *quick_sort_recur(t_stack *head, t_stack *end) {
-    if (!head || head == end)
-        return head;
-
-    t_stack *new_head = NULL, *new_end = NULL;
-
-    t_stack *pivot = partition(head, end, &new_head, &new_end);
-
-    if (new_head != pivot) {
-        t_stack *tmp = new_head;
-        while (tmp->next != pivot)
-            tmp = tmp->next;
-        tmp->next = NULL;
-
-        new_head = quick_sort_recur(new_head, tmp);
-
-        tmp = get_tail(new_head);
-        tmp->next =  pivot;
-    }
-
-    pivot->next = quick_sort_recur(pivot->next, new_end);
-
-    return new_head;
-}
-
-void quick_sort(t_stack **head_ref) {
-    (*head_ref) = quick_sort_recur(*head_ref, get_tail(*head_ref));
-    return;
-}*/
 
 int find_middle(t_stack *head)
 {
@@ -163,12 +116,12 @@ int find_middle(t_stack *head)
     return slow_ptr->n;
 }
 
-int	find_mid(t_stack *stack)
+int	find_mid(t_stack *stack, int maxsize)
 {
 	t_stack	*copy;
 	int mid_number;
 
-	copy = copy_stack(stack);
+	copy = copy_stack(stack, maxsize);
 	merge_sort(&copy);
 	mid_number = find_middle(copy);
 	free(copy);

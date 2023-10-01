@@ -11,7 +11,7 @@ NAME = push_swap
 
 #SOURCES
 SRCS_PUSH_SWAP	=	input_handler.c push_op.c push_swap.c reverse_op.c rotate_op.c swap_op.c	\
-					find_mid.c
+					find_mid.c sort.c utils.c
 
 DIR_PUSH_SWAP	=	$(addprefix ./src/, $(SRCS_PUSH_SWAP))
 
