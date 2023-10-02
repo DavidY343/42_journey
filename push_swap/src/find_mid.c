@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_mid.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dyanez-m <dyanez-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 18:48:07 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/10/01 14:39:32 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/10/02 13:46:36 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,17 @@ t_stack *copy_stack(t_stack *stack, int chunk)
 	return new_stack;
 }
 
+void free_stack(t_stack *stack)
+{
+	t_stack *temp;
+
+	while (stack != NULL)
+	{
+		temp = stack;
+		stack = stack->next;
+		free(temp);
+	}
+}
 
 t_stack *sorted_merge(t_stack *a, t_stack *b)
 {
@@ -117,6 +128,6 @@ int	find_mid(t_stack *stack, int chunk)
 	copy = copy_stack(stack, chunk);
 	merge_sort(&copy);
 	mid_number = find_middle(copy);
-	free(copy);
+	free_stack(copy);
 	return (mid_number);
 }

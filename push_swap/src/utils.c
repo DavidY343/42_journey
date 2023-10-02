@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dyanez-m <dyanez-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 01:01:01 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/10/01 18:02:33 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/10/01 22:47:16 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int is_sorted_asc(t_stack *stack, int chunk)
 	int last_num = -2147483648; 
 	while (stack != NULL)
 	{
-		if (stack->chunk == chunk)
+		if (stack->chunk == chunk || chunk == -1)
 		{
 			if (stack->n < last_num)
 				return 0; 
@@ -121,4 +121,12 @@ int count_elements_supirior(t_stack *stack, int chunk, int mid)
 	return count;
 }
 
-
+int size(t_stack *top) {
+    int count = 0;
+    t_stack *current = top;
+    while(current != NULL) {
+        count++;
+        current = current->next;
+    }
+    return count;
+}

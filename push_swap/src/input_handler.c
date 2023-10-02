@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dyanez-m <dyanez-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 16:14:01 by david             #+#    #+#             */
-/*   Updated: 2023/10/01 17:46:26 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/10/01 23:40:23 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	*check_inputs_aux(char **argv, int i, int *size)
 	int		j;
 
 	j = 0;
-	if (argv[j] == '\0' || argv[j][0] == '-')
+	if (argv[j] == 0 || argv[j][0] == '-')
 	{
 		ft_putendl_fd("Error", 2);
 		exit (0);
@@ -89,6 +89,19 @@ void	check_duplicates(int *number, int size)
         i++;
     }
 }
+
+void free_memory(char **argv)
+{
+	int	i;
+
+	i = 0;
+	while (argv[i] != 0)
+	{
+		free(argv[i]);
+		i++;
+	}
+	free(argv);
+}
 int	*check_inputs(int argc, char **argv, int *size)
 {
 	int	*nbr;
@@ -102,7 +115,7 @@ int	*check_inputs(int argc, char **argv, int *size)
 	{
 		argv = ft_split(argv[1], ' ');
 		nbr = check_inputs_aux(argv, 0, size); 
-		free(argv);
+		free_memory(argv);
 	}
 	else
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dyanez-m <dyanez-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 15:38:24 by david             #+#    #+#             */
-/*   Updated: 2023/10/01 18:00:13 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/10/02 13:53:08 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,14 @@ void sort_three(t_stack **a)
 
 void	decider(t_stack **a, t_stack **b, int size)
 {
-	if (size == 3)
+	if (size == 2 && is_sorted_asc(*a, 0) == 0)
+		sa(a);
+	else if (size == 3)
 		sort_three(a);
 	else
 		sort(a, b);
 }
+
 int	main(int argc, char **argv)
 {
 	t_stack	*a;
@@ -55,5 +58,7 @@ int	main(int argc, char **argv)
 	nbr = check_inputs(argc, argv, &size);
 	fill_stack(&a, nbr, size);
 	decider(&a, &b, size);
+	free_stack(a);
+	free_stack(b);
 	free(nbr);
 }
