@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_two.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dyanez-m <dyanez-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:05:36 by david             #+#    #+#             */
-/*   Updated: 2023/10/02 18:10:05 by david            ###   ########.fr       */
+/*   Updated: 2023/10/02 20:53:43 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	scan_through_a(t_stack **a, t_stack **b, int mid, int chunk)
 	ra_uses = 0;
 	if (*b != NULL)
 		new_chunk = peek_chunk(*b) + 1;
-	while (peek_chunk(*a) == chunk && i > 0)
+	while (i > 0)
 	{
 		if (peek_num(*a) < mid)
 			scan_through_a_top(a, b, new_chunk, &i);
@@ -75,7 +75,7 @@ int	scan_through_b(t_stack **a, t_stack **b, int mid, int chunk)
 	i = count_elements_supirior(*b, chunk, mid);
 	if (*a != NULL)
 		new_chunk = peek_chunk(*a) + 1;
-	while (peek_chunk(*b) == chunk && i)
+	while (i)
 	{
 		if (peek_num(*b) > mid)
 		{
