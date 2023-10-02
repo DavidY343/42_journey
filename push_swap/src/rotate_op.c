@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate_op.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 17:14:34 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/10/01 16:51:29 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/10/02 16:32:05 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,6 @@
 // Función para rotar los elementos de la pila hacia arriba (rotate)
 void	rotate(t_stack **stack)
 {
-	/*t_stack	*first;
-	t_stack	*second;
-
-	if (*top == NULL || (*top)->next == NULL)
-		return ;
-	first = *top;
-	second = first->next;
-	while (second->next != NULL)
-	{
-		first = second;
-		second = second->next;
-	}
-	first->next = NULL;
-	second->next = *top;
-	*top = second;*/
 	t_stack	*tmp;
 	t_stack	*iter;
 

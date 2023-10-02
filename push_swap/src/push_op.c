@@ -3,42 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   push_op.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 16:46:55 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/10/01 15:01:24 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/10/02 15:39:17 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-
-t_stack	*new_node(int n, int chunk)
-{
-	t_stack	*node;
-
-	node = (t_stack *)malloc(sizeof(t_stack));
-	if (!node)
-		return (0);
-	node->n = n;
-	node->next = NULL;
-	node->chunk = chunk;
-	return (node);
-}
-
-// Función para eliminar un elemento de la pila (pop)
-int	pop(t_stack **top)
-{
-	t_stack	*temp;
-	int		n;
-
-	if (*top == NULL)
-		return (-1);
-	n = (*top)->n;
-	temp = *top;
-	*top = (*top)->next;
-	free(temp);
-	return (n);
-}
 
 // Función para añadir un elemento a la pila (push)
 void	push(t_stack **top, int n, int chunk)

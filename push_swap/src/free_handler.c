@@ -1,39 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   free_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/15 19:30:24 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/10/02 15:19:51 by david            ###   ########.fr       */
+/*   Created: 2023/10/02 15:26:41 by david             #+#    #+#             */
+/*   Updated: 2023/10/02 18:07:41 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/push_swap.h"
 
-long	ft_atoi(const char *nptr)
+void	free_memory(char **argv)
 {
-	long	result;
-	long	sign;
-	int		i;
+	int	i;
 
 	i = 0;
-	sign = 1;
-	result = 0;
-	while (nptr[i] == ' ' || (nptr[i] >= 9 && nptr[i] <= 13))
-		i++;
-	if (nptr[i] == '+' || nptr[i] == '-')
+	while (argv[i] != 0)
 	{
-		if (nptr[i] == '-')
-			sign *= -1;
+		free(argv[i]);
 		i++;
 	}
-	while (nptr[i] >= '0' && nptr[i] <= '9')
+	free(argv);
+}
+
+void	free_stack(t_stack *stack)
+{
+	t_stack	*temp;
+
+	while (stack != NULL)
 	{
-		result *= 10;
-		result += nptr[i] - '0';
-		i++;
+		temp = stack;
+		stack = stack->next;
+		free(temp);
 	}
-	return (result * sign);
+}
+
+void	free_leftovers(int *size, t_stack *a, t_stack *b)
+{
+	free_stack(a);
+	free_stack(b);
+	free(size);
 }

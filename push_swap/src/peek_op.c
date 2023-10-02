@@ -1,39 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   peek_op.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/15 19:30:24 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/10/02 15:19:51 by david            ###   ########.fr       */
+/*   Created: 2023/10/02 17:36:54 by david             #+#    #+#             */
+/*   Updated: 2023/10/02 17:38:16 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/push_swap.h"
 
-long	ft_atoi(const char *nptr)
+int	peek_chunk(t_stack *stack)
 {
-	long	result;
-	long	sign;
-	int		i;
+	if (stack == NULL)
+		return (-1);
+	return (stack->chunk);
+}
 
-	i = 0;
-	sign = 1;
-	result = 0;
-	while (nptr[i] == ' ' || (nptr[i] >= 9 && nptr[i] <= 13))
-		i++;
-	if (nptr[i] == '+' || nptr[i] == '-')
+int	peek_num(t_stack *stack)
+{
+	if (stack == NULL)
+		return (-1);
+	return (stack->n);
+}
+
+int	peek_bottom(t_stack *stack)
+{
+	t_stack	*temp;
+
+	temp = stack;
+	if (temp == NULL)
+		return (-1);
+	else
 	{
-		if (nptr[i] == '-')
-			sign *= -1;
-		i++;
+		while (temp->next != NULL)
+			temp = temp->next;
+		return (temp->n);
 	}
-	while (nptr[i] >= '0' && nptr[i] <= '9')
-	{
-		result *= 10;
-		result += nptr[i] - '0';
-		i++;
-	}
-	return (result * sign);
 }

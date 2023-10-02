@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dyanez-m <dyanez-m@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 16:12:52 by david             #+#    #+#             */
-/*   Updated: 2023/10/02 13:52:49 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/10/02 18:06:38 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ typedef struct s_stack
 }	t_stack;
 
 //sort
+int	scan_through_b(t_stack **a, t_stack **b, int mid, int chunk);
+void	free_leftovers(int *size, t_stack *a, t_stack *b);
 void free_stack(t_stack *stack);
 void free_memory(char **argv);
 int size(t_stack *top);

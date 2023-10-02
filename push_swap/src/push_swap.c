@@ -3,41 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dyanez-m <dyanez-m@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 15:38:24 by david             #+#    #+#             */
-/*   Updated: 2023/10/02 13:53:08 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/10/02 16:31:20 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void print_stack(t_stack *a)
-{
-	t_stack *temp;
-
-	temp = a;
-	while (temp != NULL)
-	{
-		ft_printf("n = %d chunk = %d\n", temp->n, temp->chunk);
-		temp = temp->next;
-	}
-}
-
-void sort_three(t_stack **a)
-{
-    while (is_sorted_asc(*a, 0) == 0)
-	{
-		if ((*a)->n > (*a)->next->n && (*a)->n < (*a)->next->next->n)
-			sa(a);
-		else
-			ra(a);
-	}
-}
-
 void	decider(t_stack **a, t_stack **b, int size)
 {
-	if (size == 2 && is_sorted_asc(*a, 0) == 0)
+	if (size == 2)
 		sa(a);
 	else if (size == 3)
 		sort_three(a);
@@ -57,8 +34,7 @@ int	main(int argc, char **argv)
 	b = NULL;
 	nbr = check_inputs(argc, argv, &size);
 	fill_stack(&a, nbr, size);
-	decider(&a, &b, size);
-	free_stack(a);
-	free_stack(b);
-	free(nbr);
+	if (!is_sorted_asc(a, 0))
+		decider(&a, &b, size);
+	free_leftovers(nbr, a, b);
 }
