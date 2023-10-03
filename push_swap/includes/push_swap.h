@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 16:12:52 by david             #+#    #+#             */
-/*   Updated: 2023/10/02 18:06:38 by david            ###   ########.fr       */
+/*   Updated: 2023/10/03 15:13:05 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,43 +26,35 @@ typedef struct s_stack
 	int				chunk;
 }	t_stack;
 
-//sort
-int	scan_through_b(t_stack **a, t_stack **b, int mid, int chunk);
+int		scan_through_b(t_stack **a, t_stack **b, int mid, int chunk);
 void	free_leftovers(int *size, t_stack *a, t_stack *b);
-void free_stack(t_stack *stack);
-void free_memory(char **argv);
-int size(t_stack *top);
-int count_elements_supirior(t_stack *stack, int chunk, int mid);
-int count_elements_minor(t_stack *stack, int chunk, int mid);
+void	free_stack(t_stack *stack);
+void	free_memory(char **argv);
+int		count_elements_supirior(t_stack *stack, int chunk, int mid);
+int		count_elements_minor(t_stack *stack, int chunk, int mid);
 void	sort_three(t_stack **a);
-int count_elements(t_stack *stack, int chunk);
-int peek_chunk(t_stack *stack);
-int is_sorted_asc(t_stack *stack, int chunk);
-int is_sorted_desc(t_stack *stack, int chunk);
-int peek_num(t_stack *head);
-int peek_bottom(t_stack *top);
-int	scan_through_a(t_stack **a, t_stack **b, int mid, int chunk);
-void first_part(t_stack **a, t_stack **b, int chunk);
+int		count_elements(t_stack *stack, int chunk);
+int		peek_chunk(t_stack *stack);
+int		is_sorted_asc(t_stack *stack, int chunk);
+int		is_sorted_desc(t_stack *stack, int chunk);
+int		peek_num(t_stack *head);
+int		peek_bottom(t_stack *top);
+int		scan_through_a(t_stack **a, t_stack **b, int mid, int chunk);
+void	first_part(t_stack **a, t_stack **b, int chunk);
 void	second_part(t_stack **a, t_stack **b, int chunk_size);
 void	sort(t_stack **a, t_stack **b);
-
-// find mid
 t_stack	*copy_stack(t_stack *original, int chunk);
-t_stack *sorted_merge(t_stack *a, t_stack *b);
-void front_back_split(t_stack *source, t_stack **front_ref, t_stack **back_ref);
-void merge_sort(t_stack **head_ref);
-int find_middle(t_stack *head);
-int	find_mid(t_stack *stack, int chunk);
+t_stack	*sorted_merge(t_stack *a, t_stack *b);
+void	front_back_split(t_stack *src, t_stack **front_ref, t_stack **back_ref);
+void	merge_sort(t_stack **head_ref);
+int		find_mid(t_stack *stack, int chunk);
 
 // input_handler
 void	decider(t_stack **a, t_stack **b, int size);
-void 	print_stack(t_stack *a);
 void	fill_stack(t_stack **stack, int *number, int size);
 int		*check_inputs(int argc, char **argv, int *size);
 int		*check_inputs_aux(char **argv, int i, int *size);
 int		check_num(char *str);
-
-// operations declarations
 t_stack	*new_node(int n, int chunk);
 int		pop(t_stack **top);
 void	swap(t_stack **top);

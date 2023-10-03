@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_one.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dyanez-m <dyanez-m@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 18:36:57 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/10/02 21:46:15 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/10/03 15:12:28 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	first_part(t_stack **a, t_stack **b, int chunk)
 
 	while ((*a) != NULL && is_sorted_asc(*a, chunk) == 0)
 	{
-		mid = find_mid(*a, chunk);		
+		mid = find_mid(*a, chunk);
 		ra_uses = scan_through_a(a, b, mid, chunk);
 		while (ra_uses > 0 && chunk != 0)
 		{
