@@ -1,15 +1,39 @@
-CC=gcc
-FLAGS=-Wno-implicit-function-declaration
-CFLAGS=-I.
-OBJ = msh.o 
-INC= parser.o
-LIBS=-lparser -lpthread
+#Variables
 
-%.o: %.c 
-	$(CC) $(FLAGS) -c -o $@ $< $(CFLAGS)
+LIBFT_PATH = ./libft
+LIBFT = $(LIBFT_PATH)/libft.a
 
-msh: $(OBJ)
-	$(CC) $(FLAGS) -L. -o $@ $< $(LIBS) -Wl,-rpath=.
+CC = cc
+RM = rm -f
+CFLAGS = -Wall -Wextra -Werror
 
-clean:
-	rm -f ./msh.o ./msh
+NAME = pipex
+
+#SOURCES
+SRCS_PIPEX	=	pipex.c
+
+DIR_PIPEX	=	$(addprefix ./src/, $(SRCS_PIPEX))
+
+OBJS			= 	$(DIR_PIPEX:.c=.o)
+
+#INSTRUCTIONS
+
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(DIR_PIPEX) -o $(NAME)
+
+#$(LIBFT):
+#	make -C $(LIBFT_PATH) all
+
+clean:	
+#	make -C $(LIBFT_PATH) clean
+	$(RM) $(OBJS) $(BONUS_OBJS)
+
+fclean: clean
+#	make -C $(LIBFT_PATH) fclean
+	$(RM) $(NAME)
+
+re: fclean all
+
+.PHONY: all clean fclean re
