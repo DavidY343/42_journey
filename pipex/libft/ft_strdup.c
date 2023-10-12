@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/04 00:22:02 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/10/12 16:49:58 by dyanez-m         ###   ########.fr       */
+/*   Created: 2023/09/15 20:08:04 by dyanez-m          #+#    #+#             */
+/*   Updated: 2023/09/16 14:04:24 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <fcntl.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <string.h>
-# include <sys/types.h>
-# include <sys/wait.h>
-# include "../libft/libft.h"
+char	*ft_strdup(const char *s)
+{
+	char	*result;
+	int		pos;
 
-void	msg_error(char *text);
-char	*path_handler(char *param, char **envp);
-
-#endif
+	pos = ft_strlen(s);
+	result = (char *)malloc((pos + 1) * sizeof(char));
+	if (!result)
+		return (0);
+	pos = 0;
+	while (s[pos] != '\0')
+	{
+		result[pos] = s[pos];
+		pos++;
+	}
+	result[pos] = '\0';
+	return (result);
+}

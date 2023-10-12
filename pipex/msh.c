@@ -8,7 +8,6 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-#include <wait.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -20,6 +19,54 @@
 
 #define MAX_COMMANDS 8
 
+int read_command(char* input, char*** argvv, char filev[][64], int* in_background) {
+    int command_counter = 0;
+    char* token;
+    char* saveptr1;
+    char* saveptr2;
+
+    // Inicializamos filev con "0" para indicar que no hay redirecciones por defecto
+    strcpy(filev[0], "0");
+    strcpy(filev[1], "0");
+    strcpy(filev[2], "0");
+
+    // Dividimos la entrada en comandos usando el delimitador '|'
+    token = strtok_r(input, "|", &saveptr1);
+    while (token != NULL) {
+        // Parseamos los argumentos del comando
+        char** args = (char**)malloc(MAX_COMMANDS * sizeof(char*));
+        for (int i = 0; i < MAX_COMMANDS; i++) {
+            args[i] = NULL;
+        }
+        int i = 0;
+        char* arg = strtok_r(token, " ", &saveptr2);
+        while (arg != NULL) {
+            args[i] = arg;
+            arg = strtok_r(NULL, " ", &saveptr2);
+            i++;
+        }
+        // Guardamos los argumentos en argvv
+        argvv[command_counter] = args;
+
+        // Verificamos si hay redirecciones en el comando
+        for (int j = 0; j < i; j++) {
+            if (strcmp(args[j], "<") == 0) {
+                strcpy(filev[0], args[j + 1]);
+                args[j] = NULL;  // Eliminamos "<" de los argumentos
+            }
+            if (strcmp(args[j], ">") == 0) {
+                strcpy(filev[1], args[j + 1]);
+                args[j] = NULL;  // Eliminamos ">" de los argumentos
+            }
+        }
+
+        // Obtenemos el siguiente comando
+        token = strtok_r(NULL, "|", &saveptr1);
+        command_counter++;
+    }
+
+    return command_counter;
+}
 
 // ficheros por si hay redirección
 char filev[3][64];

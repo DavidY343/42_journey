@@ -1,28 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/04 00:22:02 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/10/12 16:49:58 by dyanez-m         ###   ########.fr       */
+/*   Created: 2023/09/16 17:04:45 by dyanez-m          #+#    #+#             */
+/*   Updated: 2023/09/16 17:15:27 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef PIPEX_H
-# define PIPEX_H
+#include <unistd.h>
+#include "libft.h"
 
-# include <unistd.h>
-# include <fcntl.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <string.h>
-# include <sys/types.h>
-# include <sys/wait.h>
-# include "../libft/libft.h"
+void	ft_putnbr_fd(int n, int fd)
+{
+	char	digit;
 
-void	msg_error(char *text);
-char	*path_handler(char *param, char **envp);
-
-#endif
+	if (n == -2147483648)
+	{
+		write(fd, "-", 1);
+		write(fd, "2", 1);
+		ft_putnbr_fd(147483648, fd);
+	}
+	else if (n > 9)
+	{
+		ft_putnbr_fd(n / 10, fd);
+		ft_putnbr_fd(n % 10, fd);
+	}
+	else if (n < 0)
+	{
+		write(fd, "-", 1);
+		n = -n;
+		ft_putnbr_fd(n, fd);
+	}
+	else
+	{
+		digit = '0' + n;
+		write(fd, &digit, 1);
+	}
+}

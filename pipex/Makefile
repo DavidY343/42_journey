@@ -10,28 +10,28 @@ CFLAGS = -Wall -Wextra -Werror
 NAME = pipex
 
 #SOURCES
-SRCS_PIPEX	=	pipex.c
+SRCS_PIPEX	=	pipex.c pipex_utils.c
 
 DIR_PIPEX	=	$(addprefix ./src/, $(SRCS_PIPEX))
 
-OBJS			= 	$(DIR_PIPEX:.c=.o)
+OBJS		= 	$(DIR_PIPEX:.c=.o)
 
 #INSTRUCTIONS
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) $(LIBFT)
 	$(CC) $(CFLAGS) $(DIR_PIPEX) -o $(NAME)
 
-#$(LIBFT):
-#	make -C $(LIBFT_PATH) all
+$(LIBFT):
+	make -C $(LIBFT_PATH) all
 
 clean:	
-#	make -C $(LIBFT_PATH) clean
+	make -C $(LIBFT_PATH) clean
 	$(RM) $(OBJS) $(BONUS_OBJS)
 
 fclean: clean
-#	make -C $(LIBFT_PATH) fclean
+	make -C $(LIBFT_PATH) fclean
 	$(RM) $(NAME)
 
 re: fclean all

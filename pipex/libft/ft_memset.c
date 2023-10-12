@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/04 00:22:02 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/10/12 16:49:58 by dyanez-m         ###   ########.fr       */
+/*   Created: 2023/09/12 13:00:36 by dyanez-m          #+#    #+#             */
+/*   Updated: 2023/09/15 22:00:18 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <fcntl.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <string.h>
-# include <sys/types.h>
-# include <sys/wait.h>
-# include "../libft/libft.h"
+void	*ft_memset(void *s, int c, size_t n)
+{
+	unsigned char	*aux;
+	int				i;
 
-void	msg_error(char *text);
-char	*path_handler(char *param, char **envp);
-
-#endif
+	aux = s;
+	i = 0;
+	while (n > 0)
+	{
+		aux[i] = (unsigned char)c;
+		n--;
+		i++;
+	}
+	return (s);
+}

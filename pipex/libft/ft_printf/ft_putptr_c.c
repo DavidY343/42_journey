@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_putptr_c.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/04 00:22:02 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/10/12 16:49:58 by dyanez-m         ###   ########.fr       */
+/*   Created: 2023/09/19 19:40:06 by dyanez-m          #+#    #+#             */
+/*   Updated: 2023/09/19 21:11:05 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef PIPEX_H
-# define PIPEX_H
+#include "ft_printf.h"
 
-# include <unistd.h>
-# include <fcntl.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <string.h>
-# include <sys/types.h>
-# include <sys/wait.h>
-# include "../libft/libft.h"
+int	ft_putptr_c(void *ptr)
+{
+	unsigned long long	p;
+	int					len;
 
-void	msg_error(char *text);
-char	*path_handler(char *param, char **envp);
-
-#endif
+	p = (unsigned long long)ptr;
+	len = ft_ulllen_base(p, 16);
+	ft_putstr_c("0x");
+	len += 2;
+	ft_write_ull(p, 16, HEX_LOW);
+	return (len);
+}

@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/04 00:22:02 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/10/12 16:49:58 by dyanez-m         ###   ########.fr       */
+/*   Created: 2023/09/15 19:40:14 by dyanez-m          #+#    #+#             */
+/*   Updated: 2023/09/15 22:00:46 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <fcntl.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <string.h>
-# include <sys/types.h>
-# include <sys/wait.h>
-# include "../libft/libft.h"
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+{
+	size_t	pos;
+	size_t	len;
 
-void	msg_error(char *text);
-char	*path_handler(char *param, char **envp);
-
-#endif
+	pos = 0;
+	len = 0;
+	while (src[len] != '\0')
+		len++;
+	if (size != 0)
+	{
+		while (src[pos] != '\0' && pos < size - 1)
+		{
+			dst[pos] = src[pos];
+			pos++;
+		}
+		dst[pos] = '\0';
+	}
+	return (len);
+}

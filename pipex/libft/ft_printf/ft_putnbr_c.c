@@ -1,28 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_putnbr_c.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/04 00:22:02 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/10/12 16:49:58 by dyanez-m         ###   ########.fr       */
+/*   Created: 2023/09/19 19:41:22 by dyanez-m          #+#    #+#             */
+/*   Updated: 2023/09/22 20:23:18 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef PIPEX_H
-# define PIPEX_H
+#include "ft_printf.h"
 
-# include <unistd.h>
-# include <fcntl.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <string.h>
-# include <sys/types.h>
-# include <sys/wait.h>
-# include "../libft/libft.h"
+static int	ft_len_base(int n, int base_len)
+{
+	int		i;
 
-void	msg_error(char *text);
-char	*path_handler(char *param, char **envp);
+	i = 0;
+	if (n == 0)
+		return (1);
+	if (n == -2147483648)
+		return (11);
+	if (n < 0)
+	{
+		n = -n;
+		i++;
+	}
+	while (n > 0)
+	{
+		n /= base_len;
+		i++;
+	}
+	return (i);
+}
 
-#endif
+int	ft_putnbr_c(int n)
+{
+	char	*digit;
+	int		len;
+
+	len = ft_len_base(n, 10);
+	digit = ft_itoa(n);
+	ft_putstr_fd(digit, 1);
+	free(digit);
+	return (len);
+}
