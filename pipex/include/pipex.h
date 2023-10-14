@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dyanez-m <dyanez-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 00:22:02 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/10/12 16:49:58 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/10/12 22:29:44 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,11 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include "../libft/libft.h"
+# include "../libft/ft_printf/ft_printf.h"
 
 void	msg_error(char *text);
-char	*path_handler(char *param, char **envp);
-
+char	*my_getenv(char *name, char **env);
+char	*get_path(char *cmd, char **env);
+void	ft_free_tab(char **tab);
+int	ft_strcmp(char *s1, char *s2);
 #endif

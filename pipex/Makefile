@@ -21,7 +21,7 @@ OBJS		= 	$(DIR_PIPEX:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(DIR_PIPEX) -o $(NAME)
+	$(CC) $(CFLAGS) $(DIR_PIPEX) -o $(NAME) $(LIBFT)
 
 $(LIBFT):
 	make -C $(LIBFT_PATH) all
