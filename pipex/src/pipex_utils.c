@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dyanez-m <dyanez-m@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 16:02:56 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/10/13 16:52:09 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/10/14 16:18:20 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,60 +14,48 @@
 
 void	msg_error(char *text)
 {
-	ft_putstr_fd(text, 2);
+	perror(text);
 	exit(1);
 }
 
-char	*my_getenv(char *name, char **env)
+
+
+char	*get_path(char **envp)
 {
-	int		i;
-	int		j;
-	char	*sub;
+	int	i;
 
 	i = 0;
-	while (env[i])
-	{
-		j = 0;
-		while (env[i][j] && env[i][j] != '=')
-			j++;
-		sub = ft_substr(env[i], 0, j);
-		if (ft_strcmp(sub, name) == 0)
-		{
-			free(sub);
-			return (env[i] + j + 1);
-		}
-		free(sub);
+	while (ft_strncmp("PATH", envp[i], 4) != 0)
 		i++;
-	}
-	return (NULL);
+	return (envp[i] + 5);
 }
 
-char	*path_handler(char *cmd, char **env)
+char	*path_handler(char *param, char **envp)
 {
 	int		i;
 	char	*exec;
-	char	**allpath;
+	char	**paths;
 	char	*path_part;
-	char	**s_cmd;
+	char	**params;
 
 	i = -1;
-	allpath = ft_split(my_getenv("PATH", env), ':');
-	s_cmd = ft_split(cmd, ' ');
-	while (allpath[++i])
+	paths = ft_split(get_path(envp), ':');
+	params = ft_split(param, ' ');
+	while (paths[++i])
 	{
-		path_part = ft_strjoin(allpath[i], "/");
-		exec = ft_strjoin(path_part, s_cmd[0]);
+		path_part = ft_strjoin(paths[i], "/");
+		exec = ft_strjoin(path_part, params[0]);
 		free(path_part);
 		if (access(exec, F_OK | X_OK) == 0)
 		{
-			ft_free_tab(s_cmd);
+			ft_free_tab(params);
 			return (exec);
 		}
 		free(exec);
 	}
-	ft_free_tab(allpath);
-	ft_free_tab(s_cmd);
-	return (cmd);
+	ft_free_tab(paths);
+	ft_free_tab(params);
+	return (param);
 }
 
 void	ft_free_tab(char **tab)
@@ -81,20 +69,4 @@ void	ft_free_tab(char **tab)
 		i++;
 	}
 	free(tab);
-}
-
-int	ft_strcmp(char *s1, char *s2)
-{
-	size_t	i;
-
-	i = 0;
-	if (!s1)
-		return (1);
-	while (s1[i] || s2[i])
-	{
-		if (s1[i] != s2[i])
-			return (s1[i] - s2[i]);
-		i++;
-	}
-	return (0);
 }
