@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_utils.c                                      :+:      :+:    :+:   */
+/*   pipex_utils_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dyanez-m <dyanez-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 16:02:56 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/10/16 11:35:23 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/10/16 11:52:31 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex.h"
+#include "../include/pipex_bonus.h"
 
 void	msg_error(char *text)
 {
@@ -59,28 +59,3 @@ char	*path_handler(char *param, char **envp)
 	ft_free(paths);
 	return (param);
 }
-/*
-char	*path_handler(char *param, char **envp)
-{
-	int		i;
-	char	*exec;
-	char	**paths;
-	char	**params;
-
-	i = -1;
-	paths = ft_split(get_path(envp), ':');
-	params = ft_split(param, ' ');
-	while (paths[++i])
-	{
-		exec = ft_strjoin(ft_strjoin(paths[i], "/"), params[0]);
-		if (access(exec, F_OK | X_OK) == 0)
-		{
-			ft_free(params);
-			return (exec);
-		}
-		free(exec);
-	}
-	ft_free(paths);
-	ft_free(params);
-	return (param);
-}*/

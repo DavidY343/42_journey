@@ -1,0 +1,3 @@
+cat text.txt
+asdsad aass does chill
+asdasd main
