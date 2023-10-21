@@ -6,7 +6,7 @@
 /*   By: dyanez-m <dyanez-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 00:22:04 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/10/16 12:20:02 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/10/17 16:52:50 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,9 @@ int	main(int argc, char **argv, char **envp)
 	if (pipe(fd) < 0)
 		msg_error("Error en la creación del pipe");
 	pid = fork();
-	if (pid == 0)
+	if (pid < 0)
+		msg_error("Error en la creación del fork");
+	else if (pid == 0)
 		child(argv, envp, fd);
 	else
 		father(argv, envp, fd);

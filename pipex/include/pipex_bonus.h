@@ -6,7 +6,7 @@
 /*   By: dyanez-m <dyanez-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 00:22:02 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/10/16 11:52:08 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/10/17 18:17:08 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,19 @@
 # include "../libft/libft.h"
 # include <errno.h>
 # include "../libft/ft_printf/ft_printf.h"
+# include "../libft/get_next_line/get_next_line.h"
+typedef struct s_params
+{
+	int		fd[2];
+	pid_t	pid;
+	int		in_fd;
+	int		out_fd;
+	int		i;
+	int		p0;
+	char	**argv;
+	char	**envp;
+	int		argc;
+} t_params;
 
 void	msg_error(char *text);
 char	*path_handler(char *cmd, char **env);

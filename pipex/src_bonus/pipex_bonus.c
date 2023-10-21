@@ -6,7 +6,7 @@
 /*   By: dyanez-m <dyanez-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 00:22:04 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/10/16 12:15:32 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/10/17 21:07:50 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,75 +27,91 @@ void	ft_exec(char *param, char **envp)
 	exit(127);
 }
 
-void	father(char **argv, char **envp, int *fd)
-{
-	int		out_fd;
-
-	out_fd = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (out_fd < 0)
-		msg_error("Error al abrir el fichero de salida");
-	dup2(fd[0], 0);
-	dup2(out_fd, 1);
-	close(fd[1]);
-	close(fd[0]);
-	close(out_fd);
-	ft_exec(argv[3], envp);
-}
-
-void	child(char **argv, char **envp, int *fd)
-{
-	int		in_fd;
-
-	in_fd = open(argv[1], O_RDONLY);
-	if (in_fd < 0)
-		msg_error("Error al abrir el fichero de entrada");
-	dup2(in_fd, 0);
-	dup2(fd[1], 1);
-	close(fd[1]);
-	close(fd[0]);
-	close(in_fd);
-	ft_exec(argv[2], envp);
-}
-
 void	here_doc_case()
 {}
-
+/*
 void	base_case()
 {
-	while (i > argc - 1)
-	{
-		pid = fork();
-		if (pid == 0) 
-		{
-			dup2(fd[1], 1);
-			dup2(fd[0], 0);
-			close(fd[1]);
-			close(fd[0]);
-			ft_exec(argv[i], envp);
-		}
-		else
-		{
-			wait(NULL);
-			close(in_fd);
-			close(fd[1]);
-			in_fd = fd[0];
-			if (i == argc - 2)
-			{
-				dup2(out_fd, 1);
-				close(out_fd);
-			}
-		}
-		i++;
-	}
+
+}*/
+
+void	param_setter(t_params *params, char **argv, char **envp)
+{
+	params->argv = argv;
+	params->envp = envp;
+	params->in_fd = open(argv[1], O_RDONLY);
 }
+
 /*Pid == 0 -> hijo y pid != 0 -> padre*/
 int	main(int argc, char **argv, char **envp)
 {
-	int		fd[2];
-	pid_t	pid;
+	t_params	params;
 
-	if (pipe(fd) < 0)
-		msg_error("Error en la creación del pipe");
-	base_case();
+	params.argc = argc;
+	params.out_fd = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	param_setter(&params, argv, envp);
+	if (params.in_fd < 0)
+		msg_error("Error al abrir el fichero de entrada");
+	if (params.out_fd < 0)
+		msg_error("Error al abrir el fichero de salida");
+	params.i = 2;
+	if (argc < 5)
+		msg_error("Error en el número de argumentos");
+	if (ft_strncmp(argv[1], "here_doc", 8) == 0)
+		here_doc_case();
+	while (params.i < argc - 1)
+	{
+		// 1 .- Si no es el ultimo proceso -> Crear pipe
+		if (params.i != (argc - 2))
+		{
+			if (pipe(params.fd) < 0)
+				msg_error("Error en la creación del pipe");
+		}
+		// 2 .- Crear fork
+		params.pid = fork();
+		if (params.pid < 0)
+			msg_error("Error en la creación del fork");
+		// 3.- redirecciones + limpieza
+		else if (params.pid == 0) // hijo 
+		{
+			if (params.i == 2) // entrada primer caso
+			{
+				dup2(params.in_fd, 0);
+				close(params.in_fd);
+			}
+			if (params.i != 2) // entrada caso general
+			{
+				dup2(params.p0, 0);
+				close(params.p0);
+			}
+			if (params.i != (argc - 2)) // salida caso general
+			{
+				dup2(params.fd[1], 1);
+				close(params.fd[1]);
+				close(params.fd[0]);
+			}
+			if (params.i == (argc - 2)) // salida ultimo caso
+			{
+				dup2(params.out_fd, 1);
+				close(params.out_fd);
+			}
+			ft_exec(argv[params.i], envp);
+		}
+		else // padre 
+		{
+			if (params.i != (argc - 2)) // entrada caso general
+			{
+				close(params.fd[1]);
+				params.p0 = params.fd[0];
+			}
+			else // entrada ultimo caso
+			{
+				close(params.fd[0]);
+			}
+		}
+		params.i = params.i + 1;
+	}
+	while (params.pid != wait(NULL))
+		;
 	return (0);
 }
