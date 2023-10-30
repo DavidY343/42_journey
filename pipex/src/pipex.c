@@ -31,7 +31,6 @@ void	father(char **argv, char **envp, int *fd)
 {
 	int		out_fd;
 
-	//wait(NULL);
 	out_fd = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (out_fd < 0)
 		msg_error("Error al abrir el fichero de salida");
@@ -57,6 +56,7 @@ void	child(char **argv, char **envp, int *fd)
 	close(in_fd);
 	ft_exec(argv[2], envp);
 }
+
 /*Pid == 0 -> hijo y pid != 0 -> padre*/
 int	main(int argc, char **argv, char **envp)
 {

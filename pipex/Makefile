@@ -11,7 +11,7 @@ NAME = pipex
 
 #SOURCES
 SRCS_PIPEX			=	pipex.c pipex_utils.c
-SRCS_PIPEX_BONUS	=	pipex_bonus.c pipex_utils_bonus.c
+SRCS_PIPEX_BONUS	=	pipex_bonus.c pipex_utils_bonus.c redirection_bonus.c here_doc_bonus.c
 DIR_PIPEX			=	$(addprefix ./src/, $(SRCS_PIPEX))
 DIR_PIPEX_BONUS		=	$(addprefix ./src_bonus/, $(SRCS_PIPEX_BONUS))
 OBJS				= 	$(DIR_PIPEX:.c=.o)

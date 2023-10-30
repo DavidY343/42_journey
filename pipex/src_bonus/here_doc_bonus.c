@@ -12,4 +12,53 @@
 
 #include "../include/pipex_bonus.h"
 
+void	here_doc_put_in(t_params *params)
+{
+	char	*line;
 
+	close(params->fd[0]);
+	while (1)
+	{
+		line = get_next_line(0);
+		if (ft_strncmp(line, params->argv[2], ft_strlen(params->argv[2])) == 0)
+		{
+			free(line);
+			exit(0);
+		}
+		printf("%s\n", line);
+		ft_putstr_fd(line, params->fd[1]);
+		free(line);
+	}
+}
+
+void	here_doc(t_params *params)
+{
+	if (pipe(params->fd) == -1)
+		exit(0);
+	params->pid = fork();
+	if (params->pid == -1)
+		exit(0);
+	if (!params->pid)
+	{
+		printf("llegue\n");
+		here_doc_put_in(params);
+	}
+	else
+	{
+		close(params->fd[1]);
+		dup2(params->fd[0], 0);
+		wait(NULL);
+	}
+}
+
+void	here_doc_case(t_params *params)
+{
+	if (params->argc < 6)
+		msg_error("Error en el número de argumentos");
+	params->i = 3;
+	params->out_fd = open(params->argv[params->argc - 1],
+			O_WRONLY | O_CREAT | O_APPEND, 0644);
+	if (params->out_fd < 0)
+		msg_error("Error al abrir el fichero de salida");
+	here_doc(params);
+}

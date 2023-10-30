@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 00:22:02 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/10/25 15:42:13 by root             ###   ########.fr       */
+/*   Updated: 2023/10/25 15:42:13 by dyanez-m             ###   ########.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef PIPEX_H_BONUS
-# define PIPEX_H_BONUS
+#ifndef PIPEX_BONUS_H
+# define PIPEX_BONUS_H
 
 # include <unistd.h>
 # include <fcntl.h>
@@ -36,8 +36,20 @@ typedef struct s_params
 	char	**argv;
 	char	**envp;
 	int		argc;
-} t_params;
+}	t_params;
 
+// redirection.c
+void	pipex_child(t_params *params);
+void	pipex_dad(t_params *params);
+void	pipex(t_params *params);
+
+// here_doc.c
+void	here_doc_case(t_params *params);
+void	here_doc(t_params *params);
+void	here_doc_put_in(t_params *params);
+// pipex_bonus.c
+void	ft_exec(char *param, char **envp);
+// pipex_utils.c
 void	msg_error(char *text);
 char	*path_handler(char *cmd, char **env);
 void	ft_free(char **string);
