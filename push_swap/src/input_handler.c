@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 16:14:01 by david             #+#    #+#             */
-/*   Updated: 2023/10/02 15:37:10 by david            ###   ########.fr       */
+/*   Updated: 2023/10/31 15:23:37 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@ int	check_num(char *str)
 	i = 0;
 	if (str[i] == '-')
 		i++;
+	if (str[i] == '\0')
+	{
+		ft_putendl_fd("Error", 2);
+		exit (0);
+	}
 	while (str[i] != '\0')
 	{
 		if (str[i] < '0' || str[i] > '9')
@@ -35,7 +40,7 @@ int	len_and_error(char **argv)
 	int		j;
 
 	j = 0;
-	if (argv[j] == 0 || argv[j][0] == '-')
+	if (argv[j] == 0)
 	{
 		ft_putendl_fd("Error", 2);
 		exit (0);
