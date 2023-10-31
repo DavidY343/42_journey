@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 22:13:55 by david             #+#    #+#             */
-/*   Updated: 2023/10/25 15:42:57 by root             ###   ########.fr       */
+/*   Updated: 2023/10/31 17:14:22 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex_bonus.h"
 
-void	here_doc_put_in(t_params *params)
+void	here_doc_terminal(t_params *params)
 {
 	char	*line;
 
@@ -25,7 +25,6 @@ void	here_doc_put_in(t_params *params)
 			free(line);
 			exit(0);
 		}
-		printf("%s\n", line);
 		ft_putstr_fd(line, params->fd[1]);
 		free(line);
 	}
@@ -37,11 +36,10 @@ void	here_doc(t_params *params)
 		exit(0);
 	params->pid = fork();
 	if (params->pid == -1)
-		exit(0);
+		exit(0);	
 	if (!params->pid)
 	{
-		printf("llegue\n");
-		here_doc_put_in(params);
+		here_doc_terminal(params);
 	}
 	else
 	{

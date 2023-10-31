@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dyanez-m <dyanez-m@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 00:22:04 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/10/17 16:52:50 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/10/31 18:13:00 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	father(char **argv, char **envp, int *fd)
 
 	out_fd = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (out_fd < 0)
-		msg_error("Error al abrir el fichero de salida");
+		msg_error("No such file or directory");
 	dup2(fd[0], 0);
 	dup2(out_fd, 1);
 	close(fd[1]);
@@ -48,7 +48,7 @@ void	child(char **argv, char **envp, int *fd)
 
 	in_fd = open(argv[1], O_RDONLY);
 	if (in_fd < 0)
-		msg_error("Error al abrir el fichero de entrada");
+		msg_error("No such file or directory");
 	dup2(in_fd, 0);
 	dup2(fd[1], 1);
 	close(fd[1]);

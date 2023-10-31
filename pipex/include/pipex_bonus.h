@@ -6,7 +6,7 @@
 /*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 00:22:02 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/10/25 15:42:13 by dyanez-m             ###   ########.fr   */
+/*   Updated: 2023/10/31 17:10:39 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	pipex(t_params *params);
 // here_doc.c
 void	here_doc_case(t_params *params);
 void	here_doc(t_params *params);
-void	here_doc_put_in(t_params *params);
+void	here_doc_terminal(t_params *params);
 // pipex_bonus.c
 void	ft_exec(char *param, char **envp);
 // pipex_utils.c
