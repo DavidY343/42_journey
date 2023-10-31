@@ -6,7 +6,7 @@
 /*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 16:14:01 by david             #+#    #+#             */
-/*   Updated: 2023/10/31 15:23:37 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/10/31 17:51:07 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,10 +107,7 @@ int	*check_inputs(int argc, char **argv, int *size)
 	int	*nbr;
 
 	if (argc < 2)
-	{
-		ft_putendl_fd("Error", 2);
 		exit (0);
-	}
 	else if (argc == 2)
 	{
 		argv = ft_split(argv[1], ' ');
