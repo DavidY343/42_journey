@@ -1,35 +1,38 @@
-#Variables
+##########################################
+# PROBAR ESTO ############################
+#.SILENT:clean to silence an instruction #
+##########################################
+
+######################
+#     Variables      #
+######################
 
 LIBFT_PATH = ./libft
 LIBFT = $(LIBFT_PATH)/libft.a
-
-MLX_DIR = ./mlx
-MLX_LIB = $(MLX_DIR)/libmlx_$(UNAME).a
-
+LIBFT_FLAGS = -L$(LIBFT_PATH) -lft
 CC = cc
 RM = rm -f
 CFLAGS = -Wall -Wextra -Werror
 
 NAME = so_long
-INCLUDES = -Imlx
-MLX_FLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
-#ifeq ($(shell uname), Linux)
-#	INCLUDES = -I/usr/include -Imlx
-#else
-#	INCLUDES = -I/opt/X11/include -Imlx
-#endif
- 
-#MLX_DIR = ./mlx
-#MLX_LIB = $(MLX_DIR)/libmlx_$(UNAME).a
-#ifeq ($(shell uname), Linux)
-#	MLX_FLAGS = -Lmlx -lmlx -L/usr/lib/X11 -lXext -lX11
-#else
-#	MLX_FLAGS = -Lmlx -lmlx -L/usr/X11/lib -lXext -lX11 -framework OpenGL -framework AppKit
-#endif
-#.SILENT:clean to silence an instruction be sure to check it out
 
-#SOURCES
-SRCS_SO_LONG		=	main.c 
+ifeq ($(shell uname), Linux)
+	MLX_INCLUDES = -I/usr/include -Imlx
+	MLX_DIR = ./mlx_linux
+	MLX_FLAGS = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+	MLX_LIB = $(MLX_DIR)/libmlx_Linux.a
+else
+	MLX_INCLUDES = -I/opt/X11/include -Imlx
+	MLX_FLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
+	MLX_DIR = ./mlx
+	MLX_LIB = $(MLX_DIR)/libmlx_$(UNAME).a
+endif
+
+######################
+#      SOURCES       #
+######################
+
+SRCS_SO_LONG		=	main.c error_handler.c input_handler.c utils.c
 SRCS_SO_LONG_BONUS	=	...
 DIR_SO_LONG			=	$(addprefix ./src/, $(SRCS_SO_LONG))
 DIR_SO_LONG_BONUS	=	$(addprefix ./src_bonus/, $(SRCS_SO_LONG_BONUS))
@@ -37,21 +40,39 @@ OBJS				= 	$(DIR_SO_LONG:.c=.o)
 OBJS_BONUS			= 	$(DIR_SO_LONG_BONUS:.c=.o)
 CACHE				=	.cache
 
-#INSTRUCTIONS
+######################
+#       COLORS       #
+######################
 
-all: $(MLX_LIB) $(NAME) $(LIBFT)
+RED					=	\033[91m
+YELLOW				=	\033[93m
+GREEN				=	\033[92m
+NO_COLOR			=	\033[0m
+
+######################
+#    INSTRUCTIONS    #
+######################
+
+all: $(MLX_LIB) $(LIBFT) $(NAME)
 
 .c.o:
-	$(CC) $(CFLAGS) -c -o $@ $< $(INCLUDES)
+	@$(CC) $(CFLAGS) -c -o $@ $< $(MLX_MLX_INCLUDES)
  
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(MLX_FLAGS)
+	@echo "$(YELLOW)[COMPILING SO_LONG]$(NO_COLOR)"
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(MLX_FLAGS) $(LIBFT_FLAGS)
+	@echo "$(GREEN)[COMPILED SO_LONG]$(NO_COLOR)"
  
 $(MLX_LIB):
+	@echo "$(YELLOW)[COMPILING MLX]$(NO_COLOR)"
 	@make -C $(MLX_DIR) all > /dev/null 2>&1
-
+	@echo "$(GREEN)[COMPILED MLX]$(NO_COLOR)"
+#> /dev/null
 $(LIBFT):
-	@make -C $(LIBFT_PATH) all > /dev/null
+	@echo "$(YELLOW)[COMPILING LIBFT]$(NO_COLOR)"
+	@make -s -C $(LIBFT_PATH) all
+	@echo "$(GREEN)[COMPILED LIBFT]$(NO_COLOR)"
+
 
 $(CACHE) : $(OBJS_BONUS) $(LIBFT)
 	$(CC) $(CFLAGS) $(OBJS_BONUS) -o $(NAME) $(LIBFT)
@@ -59,15 +80,21 @@ $(CACHE) : $(OBJS_BONUS) $(LIBFT)
 
 bonus: $(CACHE)
 
+norminette:
+	@echo "$(YELLOW)[CHECKING NORMINETTE]$(NO_COLOR)"
+	@norminette ./src/
+	@norminette ./headers/
+
 fclean: clean
-	make -C $(LIBFT_PATH) fclean
-	$(RM) $(NAME)
-	$(RM) $(CACHE)
+	@make -s -C $(LIBFT_PATH) fclean
+	@$(RM) $(NAME)
+	@$(RM) $(CACHE)
+	@echo "$(RED)[DELETED]$(NO_COLOR)"
 
 clean:	
-	make -C $(LIBFT_PATH) clean
-	make -C $(MLX_DIR) clean
-	$(RM) $(OBJS) $(OBJS_BONUS)
+	@make -s -C $(LIBFT_PATH) clean 
+	@make -s -C $(MLX_DIR) clean > /dev/null 2>&1
+	@$(RM) $(OBJS) $(OBJS_BONUS)
 
 re: fclean all
 
