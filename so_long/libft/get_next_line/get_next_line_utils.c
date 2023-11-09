@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dyanez-m <dyanez-m@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 15:33:48 by david             #+#    #+#             */
-/*   Updated: 2023/09/30 17:38:30 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/11/08 00:46:49 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr2(const char *s, int c)
 {
 	int	i;
 
@@ -41,8 +41,8 @@ char	*ft_strjoin2(char *s1, char *s2)
 	if (!s1 && !s2)
 		return (0);
 	if (!s1)
-		s1 = ft_calloc(1, sizeof(char));
-	result = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+		s1 = ft_calloc2(1, sizeof(char));
+	result = (char *)malloc(sizeof(char) * (ft_strlen2(s1) + ft_strlen2(s2) + 1));
 	if (!result)
 		return (0);
 	while (s1[++i] != '\0')
@@ -54,7 +54,7 @@ char	*ft_strjoin2(char *s1, char *s2)
 	return (result);
 }
 
-size_t	ft_strlen(const char *str)
+size_t	ft_strlen2(const char *str)
 {
 	size_t	len;
 
@@ -68,17 +68,17 @@ size_t	ft_strlen(const char *str)
 	return (len);
 }
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	*ft_calloc2(size_t nmemb, size_t size)
 {
 	void	*array;
 
 	array = (void *)malloc(size * nmemb);
 	if (array != NULL)
-		ft_bzero(array, nmemb * size);
+		ft_bzero2(array, nmemb * size);
 	return (array);
 }
 
-void	ft_bzero(void *s, size_t n)
+void	ft_bzero2(void *s, size_t n)
 {
 	unsigned char	*aux;
 	int				i;

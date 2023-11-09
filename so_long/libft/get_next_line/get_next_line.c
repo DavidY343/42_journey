@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dyanez-m <dyanez-m@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 15:32:45 by david             #+#    #+#             */
-/*   Updated: 2023/09/30 17:38:31 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/11/08 00:45:48 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_read_fd(int fd, char *preview)
 	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buffer)
 		return (0);
-	while (!(ft_strchr(preview, '\n')) && bytes_read != 0)
+	while (!(ft_strchr2(preview, '\n')) && bytes_read != 0)
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if ((!(preview) && bytes_read == 0) || bytes_read == -1)
@@ -72,7 +72,7 @@ char	*ft_situation_handler(char *preview)
 
 	i = 0;
 	j = 0;
-	len_preview = ft_strlen(preview);
+	len_preview = ft_strlen2(preview);
 	while (preview[i] != '\0' && preview[i] != '\n')
 		i++;
 	if (preview[i] == '\0')
