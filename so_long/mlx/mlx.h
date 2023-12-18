@@ -12,7 +12,7 @@
 **   MinilibX -  Please report bugs
 */
 
-#define GL_SILENCE_DEPRECATION
+
 /*
 ** FR msg - FR msg - FR msg
 **
@@ -147,4 +147,3 @@ int	mlx_do_key_autorepeaton(void *mlx_ptr);
 int	mlx_do_sync(void *mlx_ptr);
 
 #endif /* MLX_H */
-#define GL_SILENCE_DEPRECATION

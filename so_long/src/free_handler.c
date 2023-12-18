@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   free_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:12:09 by david             #+#    #+#             */
-/*   Updated: 2023/11/09 13:17:13 by david            ###   ########.fr       */
+/*   Updated: 2023/12/18 17:22:34 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../headers/so_long.h"
+#include "../headers/so_long.h"
 
 void	free_map(char **map)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (map[i] != 0)

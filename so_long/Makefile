@@ -16,17 +16,12 @@ CFLAGS = -Wall -Wextra -Werror
 
 NAME = so_long
 
-ifeq ($(shell uname), Linux)
-	MLX_INCLUDES = -I/usr/include -Imlx
-	MLX_DIR = ./mlx_linux
-	MLX_FLAGS = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
-	MLX_LIB = $(MLX_DIR)/libmlx_Linux.a
-else
-	MLX_INCLUDES = -I/opt/X11/include -Imlx
-	MLX_FLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
-	MLX_DIR = ./mlx
-	MLX_LIB = $(MLX_DIR)/libmlx_$(UNAME).a
-endif
+
+MLX_INCLUDES = -I/opt/X11/include -Imlx
+MLX_FLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
+MLX_DIR = ./mlx
+MLX_LIB = $(MLX_DIR)/libmlx_$(UNAME).a
+
 
 ######################
 #      SOURCES       #

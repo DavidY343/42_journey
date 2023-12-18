@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:09:26 by david             #+#    #+#             */
-/*   Updated: 2023/11/10 00:01:46 by david            ###   ########.fr       */
+/*   Updated: 2023/12/18 18:51:09 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ static void	check_border(t_prs *prs, char **cpy_map)
 	}
 }
 
+/*	if (prs->height == prs->width)
+		msg_error_map("The square map is not valid\n", prs->map);*/
 static void	get_max_x_y(t_prs *prs)
 {
 	int	i;
@@ -60,8 +62,6 @@ static void	get_max_x_y(t_prs *prs)
 			msg_error_map("The map isn't a perfect rectangle\n", prs->map);
 	}
 	prs->height = i;
-	if (prs->height == prs->width)
-		msg_error_map("The square map is not valid\n", prs->map);
 }
 
 static void	check_map(t_prs *prs)

@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 13:11:24 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/11/10 02:33:41 by david            ###   ########.fr       */
+/*   Updated: 2023/12/18 19:21:14 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../headers/so_long.h"
-# include "../headers/macros.h"
+#include "../headers/so_long.h"
+#include "../headers/macros.h"
 
 int	flood_fill(int x, int y, t_prs *prs, char **map)
 {
@@ -35,9 +35,30 @@ int	flood_fill(int x, int y, t_prs *prs, char **map)
 	return (0);
 }
 
+/*
+static void print_map(char **map)
+{
+	int i;
+
+	i = 0;
+	while (map[i] != 0)
+	{
+		ft_printf("%s\n", map[i]);
+		i++;
+	}
+}*/
+
 static void	change_prs_to_game(t_prs *prs, t_game *game)
 {
-	game->map = prs->map;
+	int	i;
+
+	i = -1;
+	game->map = (char **)malloc((prs->height + 1) * sizeof(char *));
+	while (++i < prs->height)
+	{
+		game->map[i] = ft_strdup(prs->map[i]);
+	}
+	game->map[prs->height] = NULL;
 	game->width = prs->width;
 	game->height = prs->height;
 	game->coins = prs->coins;
@@ -49,8 +70,9 @@ static void	init_game(t_game *game)
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		msg_error("Map doesn't init\n");
+	game->win = mlx_new_window(game->mlx, game->width * WIDTH,
+			game->height * HEIGHT, "so_long");
 	init_image(game);
-	game->win = mlx_new_window(game->mlx, game->width * WIDTH, game->height * HEIGHT, "so_long");
 	ft_visualize(game);
 	mlx_loop(game->mlx);
 	msg_error("Error inesperado\n");

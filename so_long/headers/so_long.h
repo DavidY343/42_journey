@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 13:07:00 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/11/10 02:38:49 by david            ###   ########.fr       */
+/*   Updated: 2023/12/18 18:59:18 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct s_game
 }	t_game;
 
 //main.c 
-int	flood_fill(int x, int y, t_prs *prs, char **map);
+int		flood_fill(int x, int y, t_prs *prs, char **map);
 
 // error_handler.c 
 void	msg_error(char *text);
@@ -75,6 +75,6 @@ void	free_map(char **map);
 
 //image_handler.c
 void	init_image(t_game *game);
-void 	ft_visualize(t_game *game);
+void	ft_visualize(t_game *game);
 
 #endif
