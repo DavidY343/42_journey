@@ -6,65 +6,65 @@
 /*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:09:26 by david             #+#    #+#             */
-/*   Updated: 2023/11/09 18:15:42 by david            ###   ########.fr       */
+/*   Updated: 2023/11/10 00:01:46 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/so_long.h"
 /*
-static void	print_map(t_data *data)
+static void	print_map(t_prs *prs)
 {
 	int i = 0;
-	while (data->map[i] != 0)
+	while (prs->map[i] != 0)
 	{
-		printf("%s\n", data->map[i]);
+		printf("%s\n", prs->map[i]);
 		i++;
 	}
 }*/
-static void	check_border(t_data *data, char **cpy_map)
+static void	check_border(t_prs *prs, char **cpy_map)
 {
 	int	i;
 	int	j;
 
 	i = -1;
-	while (data && data->map[++i])
+	while (prs && prs->map[++i])
 	{
 		j = -1;
-		while (data->map[i][++j])
+		while (prs->map[i][++j])
 		{
-			if (data->map[i][j] == 'P')
+			if (prs->map[i][j] == 'P')
 			{
-				if (flood_fill(i, j, data, cpy_map) == 0)
-					msg_error_map("No possible solution\n", data->map);
+				if (flood_fill(i, j, prs, cpy_map) == 0)
+					msg_error_map("No possible solution\n", prs->map);
 			}
-			if (data->map[i][j] != '1' && data->map[i][j] != '0' && data->map[i]
-				[j] != 'C' && data->map[i][j] != 'P' && data->map[i][j] != 'E')
-				msg_error_map("Map isn't built a 1, 0, E, P, C\n", data->map);
-			else if ((i == 0 || j == 0 || i == (data->height - 1)
-					|| j == (data->width - 1)) && data->map[i][j] != '1')
-				msg_error_map("The map isn't surrounded by walls\n", data->map);
+			if (prs->map[i][j] != '1' && prs->map[i][j] != '0' && prs->map[i]
+				[j] != 'C' && prs->map[i][j] != 'P' && prs->map[i][j] != 'E')
+				msg_error_map("Map isn't built a 1, 0, E, P, C\n", prs->map);
+			else if ((i == 0 || j == 0 || i == (prs->height - 1)
+					|| j == (prs->width - 1)) && prs->map[i][j] != '1')
+				msg_error_map("The map isn't surrounded by walls\n", prs->map);
 		}
 	}
 }
 
-static void	get_max_x_y(t_data *data)
+static void	get_max_x_y(t_prs *prs)
 {
 	int	i;
 
 	i = -1;
-	data->height = -1;
-	data->width = ft_strlen2(data->map[0]);
-	while (data && data->map[++i])
+	prs->height = -1;
+	prs->width = ft_strlen2(prs->map[0]);
+	while (prs && prs->map[++i])
 	{
-		if (data->width != (int)ft_strlen2(data->map[i]))
-			msg_error_map("The map isn't a perfect rectangle\n", data->map);
+		if (prs->width != (int)ft_strlen2(prs->map[i]))
+			msg_error_map("The map isn't a perfect rectangle\n", prs->map);
 	}
-	data->height = i;
-	if (data->height == data->width)
-		msg_error_map("The square map is not valid\n", data->map);
+	prs->height = i;
+	if (prs->height == prs->width)
+		msg_error_map("The square map is not valid\n", prs->map);
 }
 
-static void	check_map(t_data *data)
+static void	check_map(t_prs *prs)
 {
 	int	i;
 	int	player;
@@ -73,26 +73,26 @@ static void	check_map(t_data *data)
 	i = -1;
 	player = 0;
 	exit = 0;
-	data->coins = 0;
-	data->c_coins = 0;
-	data->exit = 0;
-	if (!data || !data->map)
+	prs->coins = 0;
+	prs->c_coins = 0;
+	prs->exit = 0;
+	if (!prs || !prs->map)
 		msg_error("Empty map\n");
-	while (data && data->map[++i])
+	while (prs && prs->map[++i])
 	{
-		exit += count_char(data->map[i], 'E');
-		data->coins += count_char(data->map[i], 'C');
-		player += count_char(data->map[i], 'P');
+		exit += count_char(prs->map[i], 'E');
+		prs->coins += count_char(prs->map[i], 'C');
+		player += count_char(prs->map[i], 'P');
 	}
 	if (player != 1)
-		msg_error_map("You must've only 1 Player on the Map\n", data->map);
+		msg_error_map("You must've only 1 Player on the Map\n", prs->map);
 	if (exit != 1)
-		msg_error_map("You must've only 1 Exit on the Map\n", data->map);
-	if (data->coins <= 0)
-		msg_error_map("You must've at least 1 Coin on the Map\n", data->map);
+		msg_error_map("You must've only 1 Exit on the Map\n", prs->map);
+	if (prs->coins <= 0)
+		msg_error_map("You must've at least 1 Coin on the Map\n", prs->map);
 }
 
-static void	read_map(int fd, t_data *data)
+static void	read_map(int fd, t_prs *prs)
 {
 	char	*line;
 	char	*map_str;
@@ -109,16 +109,16 @@ static void	read_map(int fd, t_data *data)
 		free(line);
 	}
 	close(fd);
-	data->map = ft_split(map_str, '\n');
+	prs->map = ft_split(map_str, '\n');
 	cpy_map = ft_split(map_str, '\n');
 	free(map_str);
-	check_map(data);
-	get_max_x_y(data);
-	check_border(data, cpy_map);
+	check_map(prs);
+	get_max_x_y(prs);
+	check_border(prs, cpy_map);
 	free_map(cpy_map);
 }
 
-void	check_inputs(int argc, char **argv, t_data *data)
+void	check_inputs(int argc, char **argv, t_prs *prs)
 {
 	int	fd;
 
@@ -129,6 +129,5 @@ void	check_inputs(int argc, char **argv, t_data *data)
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 		msg_error_param("No such file or directory: ", argv[1]);
-	read_map(fd, data);
-	free_map(data->map);
+	read_map(fd, prs);
 }

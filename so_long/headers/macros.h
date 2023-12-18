@@ -4,5 +4,7 @@
 
 # define RED "\033[91m"
 # define NO_COLOR "\033[0m"
+# define WIDTH 32
+# define HEIGHT 32
 
 #endif
