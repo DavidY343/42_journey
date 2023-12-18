@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 13:11:24 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/12/18 19:21:14 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/12/19 00:18:35 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,12 @@ static void	init_game(t_game *game)
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		msg_error("Map doesn't init\n");
+	init_image(game);
 	game->win = mlx_new_window(game->mlx, game->width * WIDTH,
 			game->height * HEIGHT, "so_long");
-	init_image(game);
 	ft_visualize(game);
+	mlx_key_hook(game->win, key_handler, game);
+	//mlx_hook(d->win, 17, 0, ft_free, d);
 	mlx_loop(game->mlx);
 	msg_error("Error inesperado\n");
 }

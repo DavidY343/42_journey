@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 13:07:00 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/12/18 18:59:18 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/12/19 00:38:53 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_game
 	int		width;
 	int		height;
 	int		coins;
+	int		moves;
 	void	*mlx;
 	void	*win;
 	t_img	*img;
