@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 13:07:00 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/12/19 00:38:53 by david            ###   ########.fr       */
+/*   Updated: 2023/12/19 19:02:28 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,16 @@
 //struct for the image
 typedef struct s_img
 {
-	void	*bwall;
 	void	*wwall;
-	void	*bfloor;
 	void	*wfloor;
+	void	*pfront;
+	void	*pback;
+	void	*pleft;
+	void	*pright;
+	void	*cexit;
+	void	*oexit;
+	void	*coin;
+	void	*pstart;
 	int		width;
 	int		height;
 }	t_img;
@@ -57,6 +63,7 @@ typedef struct s_game
 	t_img	*img;
 }	t_game;
 
+
 //main.c 
 int		flood_fill(int x, int y, t_prs *prs, char **map);
 
@@ -70,12 +77,19 @@ void	check_inputs(int argc, char **argv, t_prs *prs);
 
 //utils.c
 int		count_char(char *str, char c);
+void	change_exit(t_game *game, int i, int j);
+void	finder(int *i, int *j, t_game *game, char c);
 
 //free_handler.c
 void	free_map(char **map);
+int		free_mlx(t_game *game);
 
 //image_handler.c
 void	init_image(t_game *game);
 void	ft_visualize(t_game *game);
+
+//key_handler.c
+int		key_handler(int key, t_game *game);
+
 
 #endif

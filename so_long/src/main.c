@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 13:11:24 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/12/19 00:18:35 by david            ###   ########.fr       */
+/*   Updated: 2023/12/19 18:56:24 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ static void	change_prs_to_game(t_prs *prs, t_game *game)
 	game->width = prs->width;
 	game->height = prs->height;
 	game->coins = prs->coins;
+	game->moves = 0;
 	free_map(prs->map);
 }
 
@@ -73,8 +74,14 @@ static void	init_game(t_game *game)
 	init_image(game);
 	game->win = mlx_new_window(game->mlx, game->width * WIDTH,
 			game->height * HEIGHT, "so_long");
+	if (!game->win)
+	{
+		msg_error("Win doesn't init\n");
+		//free(game->mlx)
+	}
 	ft_visualize(game);
 	mlx_key_hook(game->win, key_handler, game);
+	mlx_hook(game->win, 17, 0, free_mlx, game);
 	//mlx_hook(d->win, 17, 0, ft_free, d);
 	mlx_loop(game->mlx);
 	msg_error("Error inesperado\n");
