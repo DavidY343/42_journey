@@ -22,13 +22,12 @@ MLX_FLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
 MLX_DIR = ./mlx
 MLX_LIB = $(MLX_DIR)/libmlx_$(UNAME).a
 
-
 ######################
 #      SOURCES       #
 ######################
 
 SRCS_SO_LONG		=	main.c error_handler.c input_handler.c utils.c free_handler.c image_handler.c key_handler.c
-SRCS_SO_LONG_BONUS	=	...
+SRCS_SO_LONG_BONUS	=	main_bonus.c error_handler_bonus.c input_handler_bonus.c utils_bonus.c free_handler_bonus.c image_handler_bonus.c key_handler_bonus.c
 DIR_SO_LONG			=	$(addprefix ./src/, $(SRCS_SO_LONG))
 DIR_SO_LONG_BONUS	=	$(addprefix ./src_bonus/, $(SRCS_SO_LONG_BONUS))
 OBJS				= 	$(DIR_SO_LONG:.c=.o)
@@ -70,14 +69,17 @@ $(LIBFT):
 
 
 $(CACHE) : $(OBJS_BONUS) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJS_BONUS) -o $(NAME) $(LIBFT)
-	touch $(CACHE)
+	@echo "$(YELLOW)[COMPILING SO_LONG_BONUS]$(NO_COLOR)"
+	@$(CC) $(CFLAGS) $(OBJS_BONUS) -o $(NAME) $(MLX_FLAGS) $(LIBFT_FLAGS)
+	@touch $(CACHE)
+	@echo "$(GREEN)[COMPILED SO_LONG_BONUS]$(NO_COLOR)"
 
-bonus: $(CACHE)
+bonus: $(MLX_LIB) $(LIBFT) $(CACHE)
 
 norminette:
 	@echo "$(YELLOW)[CHECKING NORMINETTE]$(NO_COLOR)"
 	@norminette ./src/
+	@norminette ./src_bonus/
 	@norminette ./headers/
 
 fclean: clean
@@ -87,7 +89,7 @@ fclean: clean
 	@echo "$(RED)[DELETED]$(NO_COLOR)"
 
 clean:	
-	@make -s -C $(LIBFT_PATH) clean 
+	@make -s -C $(LIBFT_PATH) clean
 	@make -s -C $(MLX_DIR) clean > /dev/null 2>&1
 	@$(RM) $(OBJS) $(OBJS_BONUS)
 
