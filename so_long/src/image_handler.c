@@ -6,7 +6,7 @@
 /*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 02:10:25 by david             #+#    #+#             */
-/*   Updated: 2023/12/19 17:41:12 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/12/20 12:02:18 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ static void	put_images(t_game *game, int i, int j)
 		mlx_put_image_to_window(game->mlx, game->win,
 			game->img->wfloor, j * WIDTH, i * HEIGHT);
 }
-
 
 void	ft_visualize(t_game *game)
 {

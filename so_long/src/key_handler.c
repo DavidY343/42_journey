@@ -6,7 +6,7 @@
 /*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 12:26:06 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/12/19 19:21:02 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/12/20 12:20:26 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,10 @@ void	move_w(t_game *game, int i, int j)
 		mlx_put_image_to_window(game->mlx, game->win,
 			game->img->pstart, j * WIDTH, i * HEIGHT);
 }
+
 void	move_s(t_game *game, int i, int j)
 {
-	game->img->pstart= game->img->pfront;
+	game->img->pstart = game->img->pfront;
 	if (game->map[i + 1][j] == 'E' && game->coins == 0)
 		free_mlx(game);
 	if (game->map[i + 1][j] != '1' && game->map[i + 1][j] != 'E')
@@ -57,11 +58,11 @@ void	move_s(t_game *game, int i, int j)
 	else
 		mlx_put_image_to_window(game->mlx, game->win,
 			game->img->pstart, j * WIDTH, i * HEIGHT);
-
 }
+
 void	move_d(t_game *game, int i, int j)
 {
-	game->img->pstart= game->img->pright;
+	game->img->pstart = game->img->pright;
 	if (game->map[i][j + 1] == 'E' && game->coins == 0)
 		free_mlx(game);
 	if (game->map[i][j + 1] != '1' && game->map[i][j + 1] != 'E')
@@ -106,17 +107,14 @@ void	move_a(t_game *game, int i, int j)
 			game->img->pstart, j * WIDTH, i * HEIGHT);
 }
 
-
 int	key_handler(int key, t_game *game)
 {
 	int	i;
 	int	j;
+
 	finder(&i, &j, game, 'P');
 	if (key == DESTROY)
-	{
-		mlx_destroy_window(game->mlx, game->win);
 		free_mlx(game);
-	}
 	else if (key == UP)
 		move_w(game, i, j);
 	else if (key == RIGHT)

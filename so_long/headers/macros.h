@@ -6,7 +6,7 @@
 /*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 18:58:22 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/12/19 18:25:23 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/12/20 12:27:19 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@
 # define DOWN 1
 # define LEFT 0 
 # define RIGHT 2
-# define DESTROY 256
+# define DESTROY 53
+
 #endif

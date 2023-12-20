@@ -6,7 +6,7 @@
 /*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:12:09 by david             #+#    #+#             */
-/*   Updated: 2023/12/19 19:04:07 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/12/20 12:18:26 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	free_map(char **map)
 int	free_mlx(t_game *game)
 {
 	mlx_destroy_window(game->mlx, game->win);
-    ft_printf("Ventana cerrada\n");
-    exit(0);
+	exit(0);
 	return (0);
 }

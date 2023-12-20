@@ -6,7 +6,7 @@
 /*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 13:11:24 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/12/19 18:56:24 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/12/20 12:55:25 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,6 @@ int	flood_fill(int x, int y, t_prs *prs, char **map)
 	}
 	return (0);
 }
-
-/*
-static void print_map(char **map)
-{
-	int i;
-
-	i = 0;
-	while (map[i] != 0)
-	{
-		ft_printf("%s\n", map[i]);
-		i++;
-	}
-}*/
 
 static void	change_prs_to_game(t_prs *prs, t_game *game)
 {
@@ -77,14 +64,18 @@ static void	init_game(t_game *game)
 	if (!game->win)
 	{
 		msg_error("Win doesn't init\n");
-		//free(game->mlx)
+		free(game->mlx);
 	}
 	ft_visualize(game);
 	mlx_key_hook(game->win, key_handler, game);
 	mlx_hook(game->win, 17, 0, free_mlx, game);
-	//mlx_hook(d->win, 17, 0, ft_free, d);
 	mlx_loop(game->mlx);
-	msg_error("Error inesperado\n");
+	msg_error("Error\n");
+}
+
+static void ft_leaks(void)
+{
+	system("leaks -q so_long");
 }
 
 int	main(int argc, char **argv)
@@ -92,6 +83,7 @@ int	main(int argc, char **argv)
 	t_prs	prs;
 	t_game	game;
 
+	atexit(ft_leaks);
 	check_inputs(argc, argv, &prs);
 	change_prs_to_game(&prs, &game);
 	init_game(&game);
