@@ -6,7 +6,7 @@
 /*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 13:07:00 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/12/19 19:02:28 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/12/21 12:28:40 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,30 @@ typedef struct s_img
 {
 	void	*wwall;
 	void	*wfloor;
+	void	*bwall;
+	void	*bfloor;
 	void	*pfront;
 	void	*pback;
 	void	*pleft;
 	void	*pright;
+	void	*bpfront;
+	void	*bpback;
+	void	*bpleft;
+	void	*bpright;
 	void	*cexit;
+	void	*boexit;
 	void	*oexit;
 	void	*coin;
+	void	*coin1;
+	void	*coin2;
+	void	*coin3;
+	void	*coin4;
+	void	*coin5;
+	void	*coin6;
+	void	*coin7;
+	void	*coin8;
 	void	*pstart;
+	void	*bpstart;
 	int		width;
 	int		height;
 }	t_img;
