@@ -6,7 +6,7 @@
 /*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 13:11:24 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/12/20 12:55:25 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/12/21 13:06:16 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ static void	change_prs_to_game(t_prs *prs, t_game *game)
 	game->height = prs->height;
 	game->coins = prs->coins;
 	game->moves = 0;
+	game->controlc = 0;
+	game->i = 0;
 	free_map(prs->map);
 }
 
@@ -69,21 +71,20 @@ static void	init_game(t_game *game)
 	ft_visualize(game);
 	mlx_key_hook(game->win, key_handler, game);
 	mlx_hook(game->win, 17, 0, free_mlx, game);
+	mlx_loop_hook(game->mlx, animation, game);
 	mlx_loop(game->mlx);
 	msg_error("Error\n");
 }
 
-static void ft_leaks(void)
+/*static void ft_leaks(void)
 {
 	system("leaks -q so_long");
-}
-
+}atexit(ft_leaks);*/
 int	main(int argc, char **argv)
 {
 	t_prs	prs;
 	t_game	game;
 
-	atexit(ft_leaks);
 	check_inputs(argc, argv, &prs);
 	change_prs_to_game(&prs, &game);
 	init_game(&game);

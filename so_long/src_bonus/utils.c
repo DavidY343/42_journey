@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_bonus.c                                      :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 18:57:10 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/12/20 15:13:15 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/12/20 12:04:59 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/so_long_bonus.h"
+#include "../headers/so_long.h"
 #include "../headers/macros.h"
 
 int	count_char(char *str, char c)
@@ -53,16 +53,4 @@ void	change_exit(t_game *game, int i, int j)
 		mlx_put_image_to_window(game->mlx, game->win,
 			game->img->oexit, j * WIDTH, i * HEIGHT);
 	}
-}
-
-int	print_move(t_game *game)
-{
-	char	*digit;
-	char	*message;
-	digit = ft_itoa(game->moves);
-	message = ft_strjoin("Movimiento: ", digit);
-	mlx_string_put(game->mlx, game->win, 10, 10, 0xFFFFFF, message);
-	free(digit);
-	free(message);
-	return (0);
 }

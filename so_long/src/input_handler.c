@@ -6,7 +6,7 @@
 /*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:09:26 by david             #+#    #+#             */
-/*   Updated: 2023/12/20 12:45:28 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/12/21 12:58:33 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void	get_max_x_y(t_prs *prs)
 		msg_error_map("The map exceeded the screen's width limit.\n", prs->map);
 	prs->height = i;
 	if (prs->height > 45)
-		msg_error_map("The map exceeded the screen's height limit.\n", prs->map);
+		msg_error_map("The map exceeded the screen height limit.\n", prs->map);
 }
 
 static void	check_map(t_prs *prs)

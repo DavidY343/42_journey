@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handler_bonus.c                              :+:      :+:    :+:   */
+/*   error_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 17:21:15 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/12/20 13:52:21 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/12/20 12:56:06 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/so_long_bonus.h"
+#include "../headers/so_long.h"
 #include "../headers/macros.h"
 
 void	msg_error(char *text)

@@ -26,7 +26,7 @@ MLX_LIB = $(MLX_DIR)/libmlx_$(UNAME).a
 #      SOURCES       #
 ######################
 
-SRCS_SO_LONG		=	main.c error_handler.c input_handler.c utils.c free_handler.c load_image.c put_image.c key_handler.c
+SRCS_SO_LONG		=	main.c error_handler.c input_handler.c utils.c free_handler.c load_image.c put_image.c key_handler.c animation.c
 SRCS_SO_LONG_BONUS	=	main_bonus.c error_handler_bonus.c input_handler_bonus.c utils_bonus.c free_handler_bonus.c image_handler_bonus.c key_handler_bonus.c
 DIR_SO_LONG			=	$(addprefix ./src/, $(SRCS_SO_LONG))
 DIR_SO_LONG_BONUS	=	$(addprefix ./src_bonus/, $(SRCS_SO_LONG_BONUS))

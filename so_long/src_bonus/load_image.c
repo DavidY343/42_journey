@@ -1,17 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   image_handler_bonus.c                              :+:      :+:    :+:   */
+/*   load_image.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 02:10:25 by david             #+#    #+#             */
-/*   Updated: 2023/12/20 13:54:59 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/12/21 12:58:42 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/so_long_bonus.h"
+#include "../headers/so_long.h"
 #include "../headers/macros.h"
+
+static void	init_image_coin(t_game *game)
+{
+	game->img->coin = mlx_xpm_file_to_image(game->mlx,
+			"media/coin1.xpm", &game->img->width, &game->img->height);
+	game->img->coin1 = mlx_xpm_file_to_image(game->mlx,
+			"media/coin1.xpm", &game->img->width, &game->img->height);
+	game->img->coin2 = mlx_xpm_file_to_image(game->mlx,
+			"media/coin2.xpm", &game->img->width, &game->img->height);
+	game->img->coin3 = mlx_xpm_file_to_image(game->mlx,
+			"media/coin3.xpm", &game->img->width, &game->img->height);
+	game->img->coin4 = mlx_xpm_file_to_image(game->mlx,
+			"media/coin4.xpm", &game->img->width, &game->img->height);
+	game->img->coin5 = mlx_xpm_file_to_image(game->mlx,
+			"media/coin5.xpm", &game->img->width, &game->img->height);
+	game->img->coin6 = mlx_xpm_file_to_image(game->mlx,
+			"media/coin6.xpm", &game->img->width, &game->img->height);
+	game->img->coin7 = mlx_xpm_file_to_image(game->mlx,
+			"media/coin7.xpm", &game->img->width, &game->img->height);
+	game->img->coin8 = mlx_xpm_file_to_image(game->mlx,
+			"media/coin8.xpm", &game->img->width, &game->img->height);
+}
 
 void	init_image(t_game *game)
 {
@@ -32,48 +54,7 @@ void	init_image(t_game *game)
 			"media/Cexit.xpm", &game->img->width, &game->img->height);
 	game->img->oexit = mlx_xpm_file_to_image(game->mlx,
 			"media/Oexit.xpm", &game->img->width, &game->img->height);
-	game->img->coin = mlx_xpm_file_to_image(game->mlx,
-			"media/coin.xpm", &game->img->width, &game->img->height);
 	game->img->pstart = mlx_xpm_file_to_image(game->mlx,
 			"media/Pfront.xpm", &game->img->width, &game->img->height);
-	game->img->gfront = mlx_xpm_file_to_image(game->mlx,
-			"media/Efront.xpm", &game->img->width, &game->img->height);
-}
-
-static void	put_images(t_game *game, int i, int j)
-{
-	if (game->map[i][j] == '1')
-		mlx_put_image_to_window(game->mlx, game->win,
-			game->img->wwall, j * WIDTH, i * HEIGHT);
-	else if (game->map[i][j] == 'P')
-		mlx_put_image_to_window(game->mlx, game->win,
-			game->img->pstart, j * WIDTH, i * HEIGHT);
-	else if (game->map[i][j] == 'C')
-		mlx_put_image_to_window(game->mlx, game->win,
-			game->img->coin, j * WIDTH, i * HEIGHT);
-	else if (game->map[i][j] == 'E')
-		mlx_put_image_to_window(game->mlx, game->win,
-			game->img->cexit, j * WIDTH, i * HEIGHT);
-	else if (game->map[i][j] == '0')
-		mlx_put_image_to_window(game->mlx, game->win,
-			game->img->wfloor, j * WIDTH, i * HEIGHT);
-	else if (game->map[i][j] == 'G')
-		mlx_put_image_to_window(game->mlx, game->win,
-			game->img->gfront, j * WIDTH, i * HEIGHT);
-}
-
-void	ft_visualize(t_game *game)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (game->map[++i])
-	{
-		j = -1;
-		while (game->map[i][++j])
-		{
-			put_images(game, i, j);
-		}
-	}
+	init_image_coin(game);
 }

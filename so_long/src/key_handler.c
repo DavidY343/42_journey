@@ -6,7 +6,7 @@
 /*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 12:26:06 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/12/20 12:20:26 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/12/21 12:51:20 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,9 @@ void	move_w(t_game *game, int i, int j)
 		game->map[i - 1][j] = 'P';
 		game->map[i][j] = '0';
 		game->img->pstart = game->img->pback;
-		mlx_put_image_to_window(game->mlx, game->win,
-			game->img->pstart, j * WIDTH, (i - 1) * HEIGHT);
-		mlx_put_image_to_window(game->mlx, game->win,
-			game->img->wfloor, j * WIDTH, i * HEIGHT);
 		ft_printf("Movimiento: %d\n", game->moves);
 	}
-	else
-		mlx_put_image_to_window(game->mlx, game->win,
-			game->img->pstart, j * WIDTH, i * HEIGHT);
+	ft_visualize(game);
 }
 
 void	move_s(t_game *game, int i, int j)
@@ -49,15 +43,9 @@ void	move_s(t_game *game, int i, int j)
 		game->moves++;
 		game->map[i + 1][j] = 'P';
 		game->map[i][j] = '0';
-		mlx_put_image_to_window(game->mlx, game->win,
-			game->img->pstart, j * WIDTH, (i + 1) * HEIGHT);
-		mlx_put_image_to_window(game->mlx, game->win,
-			game->img->wfloor, j * WIDTH, i * HEIGHT);
 		ft_printf("Movimiento: %d\n", game->moves);
 	}
-	else
-		mlx_put_image_to_window(game->mlx, game->win,
-			game->img->pstart, j * WIDTH, i * HEIGHT);
+	ft_visualize(game);
 }
 
 void	move_d(t_game *game, int i, int j)
@@ -72,15 +60,9 @@ void	move_d(t_game *game, int i, int j)
 		game->moves++;
 		game->map[i][j + 1] = 'P';
 		game->map[i][j] = '0';
-		mlx_put_image_to_window(game->mlx, game->win,
-			game->img->pstart, (j + 1) * WIDTH, i * HEIGHT);
-		mlx_put_image_to_window(game->mlx, game->win,
-			game->img->wfloor, j * WIDTH, i * HEIGHT);
 		ft_printf("Movimiento: %d\n", game->moves);
 	}
-	else
-		mlx_put_image_to_window(game->mlx, game->win,
-			game->img->pstart, j * WIDTH, i * HEIGHT);
+	ft_visualize(game);
 }
 
 void	move_a(t_game *game, int i, int j)
@@ -95,16 +77,9 @@ void	move_a(t_game *game, int i, int j)
 		game->moves++;
 		game->map[i][j - 1] = 'P';
 		game->map[i][j] = '0';
-		game->img->pstart = game->img->pleft;
-		mlx_put_image_to_window(game->mlx, game->win,
-			game->img->pstart, (j - 1) * WIDTH, i * HEIGHT);
-		mlx_put_image_to_window(game->mlx, game->win,
-			game->img->wfloor, j * WIDTH, i * HEIGHT);
 		ft_printf("Movimiento: %d\n", game->moves);
 	}
-	else
-		mlx_put_image_to_window(game->mlx, game->win,
-			game->img->pstart, j * WIDTH, i * HEIGHT);
+	ft_visualize(game);
 }
 
 int	key_handler(int key, t_game *game)
