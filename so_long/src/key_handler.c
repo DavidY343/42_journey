@@ -6,7 +6,7 @@
 /*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 12:26:06 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/12/21 12:51:20 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/12/21 14:00:23 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ int	key_handler(int key, t_game *game)
 		move_a(game, i, j);
 	else if (key == DOWN)
 		move_s(game, i, j);
-	finder(&i, &j, game, 'E');
-	change_exit(game, i, j);
+	change_exit(game);
 	return (0);
 }

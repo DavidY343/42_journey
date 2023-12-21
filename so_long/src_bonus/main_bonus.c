@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 13:11:24 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/12/21 13:06:16 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/12/21 14:53:48 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/so_long.h"
+#include "../headers/so_long_bonus.h"
 #include "../headers/macros.h"
 
 int	flood_fill(int x, int y, t_prs *prs, char **map)
@@ -51,6 +51,7 @@ static void	change_prs_to_game(t_prs *prs, t_game *game)
 	game->coins = prs->coins;
 	game->moves = 0;
 	game->controlc = 0;
+	game->controlg = 0;
 	game->i = 0;
 	free_map(prs->map);
 }
@@ -79,7 +80,7 @@ static void	init_game(t_game *game)
 /*static void ft_leaks(void)
 {
 	system("leaks -q so_long");
-}atexit(ft_leaks);*/
+}	atexit(ft_leaks);*/
 int	main(int argc, char **argv)
 {
 	t_prs	prs;

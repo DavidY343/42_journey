@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   load_image.c                                       :+:      :+:    :+:   */
+/*   load_image_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 02:10:25 by david             #+#    #+#             */
-/*   Updated: 2023/12/21 12:58:42 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/12/21 14:53:29 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/so_long.h"
+#include "../headers/so_long_bonus.h"
 #include "../headers/macros.h"
 
 static void	init_image_coin(t_game *game)
@@ -35,6 +35,18 @@ static void	init_image_coin(t_game *game)
 			"media/coin8.xpm", &game->img->width, &game->img->height);
 }
 
+static void	init_image_goblin(t_game *game)
+{
+	game->img->gstart = mlx_xpm_file_to_image(game->mlx,
+			"media/Gfront1.xpm", &game->img->width, &game->img->height);
+	game->img->gfront1 = mlx_xpm_file_to_image(game->mlx,
+			"media/Gfront1.xpm", &game->img->width, &game->img->height);
+	game->img->gfront2 = mlx_xpm_file_to_image(game->mlx,
+			"media/Gfront2.xpm", &game->img->width, &game->img->height);
+	game->img->gfront3 = mlx_xpm_file_to_image(game->mlx,
+			"media/Gfront3.xpm", &game->img->width, &game->img->height);
+}
+
 void	init_image(t_game *game)
 {
 	game->img = (t_img *)malloc(sizeof(t_img));
@@ -57,4 +69,5 @@ void	init_image(t_game *game)
 	game->img->pstart = mlx_xpm_file_to_image(game->mlx,
 			"media/Pfront.xpm", &game->img->width, &game->img->height);
 	init_image_coin(game);
+	init_image_goblin(game);
 }

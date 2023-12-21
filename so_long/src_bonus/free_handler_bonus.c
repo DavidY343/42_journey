@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_handler.c                                     :+:      :+:    :+:   */
+/*   free_handler_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:12:09 by david             #+#    #+#             */
-/*   Updated: 2023/12/21 14:52:19 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/12/21 14:52:36 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/so_long.h"
+#include "../headers/so_long_bonus.h"
 
 void	free_map(char **map)
 {
@@ -42,6 +42,9 @@ static void	free_image(t_game *game)
 	mlx_destroy_image(game->mlx, game->img->coin6);
 	mlx_destroy_image(game->mlx, game->img->coin7);
 	mlx_destroy_image(game->mlx, game->img->coin8);
+	mlx_destroy_image(game->mlx, game->img->gfront1);
+	mlx_destroy_image(game->mlx, game->img->gfront2);
+	mlx_destroy_image(game->mlx, game->img->gfront3);
 	free(game->img);
 }
 

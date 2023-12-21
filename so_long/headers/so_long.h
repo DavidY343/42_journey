@@ -6,7 +6,7 @@
 /*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 13:07:00 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/12/21 13:06:06 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/12/21 14:54:21 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ typedef struct s_game
 	t_img	*img;
 }	t_game;
 
-
 //main.c 
 int		flood_fill(int x, int y, t_prs *prs, char **map);
 
@@ -87,7 +86,7 @@ void	check_inputs(int argc, char **argv, t_prs *prs);
 
 //utils.c
 int		count_char(char *str, char c);
-void	change_exit(t_game *game, int i, int j);
+void	change_exit(t_game *game);
 void	finder(int *i, int *j, t_game *game, char c);
 
 //free_handler.c

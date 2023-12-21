@@ -6,7 +6,7 @@
 /*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 18:57:10 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/12/20 12:04:59 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/12/21 14:00:55 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,8 @@ void	finder(int *i, int *j, t_game *game, char c)
 	}
 }
 
-void	change_exit(t_game *game, int i, int j)
+void	change_exit(t_game *game)
 {
 	if (game->coins == 0)
-	{
-		mlx_put_image_to_window(game->mlx, game->win,
-			game->img->oexit, j * WIDTH, i * HEIGHT);
-	}
+		game->img->cexit = game->img->oexit;
 }

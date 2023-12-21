@@ -6,12 +6,12 @@
 /*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 13:07:00 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/12/20 15:04:25 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/12/21 14:55:07 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -35,8 +35,19 @@ typedef struct s_img
 	void	*cexit;
 	void	*oexit;
 	void	*coin;
+	void	*coin1;
+	void	*coin2;
+	void	*coin3;
+	void	*coin4;
+	void	*coin5;
+	void	*coin6;
+	void	*coin7;
+	void	*coin8;
 	void	*pstart;
-	void	*gfront;
+	void	*gstart;
+	void	*gfront1;
+	void	*gfront2;
+	void	*gfront3;
 	int		width;
 	int		height;
 }	t_img;
@@ -59,11 +70,13 @@ typedef struct s_game
 	int		height;
 	int		coins;
 	int		moves;
+	int		i;
+	int		controlc;
+	int		controlg;
 	void	*mlx;
 	void	*win;
 	t_img	*img;
 }	t_game;
-
 
 //main.c 
 int		flood_fill(int x, int y, t_prs *prs, char **map);
@@ -78,9 +91,9 @@ void	check_inputs(int argc, char **argv, t_prs *prs);
 
 //utils.c
 int		count_char(char *str, char c);
-void	change_exit(t_game *game, int i, int j);
+void	change_exit(t_game *game);
 void	finder(int *i, int *j, t_game *game, char c);
-int		print_move(t_game *game);
+
 //free_handler.c
 void	free_map(char **map);
 int		free_mlx(t_game *game);
@@ -92,5 +105,6 @@ void	ft_visualize(t_game *game);
 //key_handler.c
 int		key_handler(int key, t_game *game);
 
-
+//animation.c
+int		animation(t_game *game);
 #endif

@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_handler.c                                      :+:      :+:    :+:   */
+/*   key_handler_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 12:26:06 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/12/21 12:51:20 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/12/21 14:54:06 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/so_long.h"
+#include "../headers/so_long_bonus.h"
 #include "../headers/macros.h"
 
 void	move_w(t_game *game, int i, int j)
 {
 	game->img->pstart = game->img->pback;
-	if (game->map[i - 1][j] == 'E' && game->coins == 0)
+	if ((game->map[i - 1][j] == 'E' && game->coins == 0)
+		|| game->map[i - 1][j] == 'G')
 		free_mlx(game);
 	if (game->map[i - 1][j] != '1' && game->map[i - 1][j] != 'E')
 	{
@@ -26,7 +27,6 @@ void	move_w(t_game *game, int i, int j)
 		game->map[i - 1][j] = 'P';
 		game->map[i][j] = '0';
 		game->img->pstart = game->img->pback;
-		ft_printf("Movimiento: %d\n", game->moves);
 	}
 	ft_visualize(game);
 }
@@ -34,7 +34,8 @@ void	move_w(t_game *game, int i, int j)
 void	move_s(t_game *game, int i, int j)
 {
 	game->img->pstart = game->img->pfront;
-	if (game->map[i + 1][j] == 'E' && game->coins == 0)
+	if ((game->map[i + 1][j] == 'E' && game->coins == 0)
+		|| game->map[i + 1][j] == 'G')
 		free_mlx(game);
 	if (game->map[i + 1][j] != '1' && game->map[i + 1][j] != 'E')
 	{
@@ -43,7 +44,6 @@ void	move_s(t_game *game, int i, int j)
 		game->moves++;
 		game->map[i + 1][j] = 'P';
 		game->map[i][j] = '0';
-		ft_printf("Movimiento: %d\n", game->moves);
 	}
 	ft_visualize(game);
 }
@@ -51,7 +51,8 @@ void	move_s(t_game *game, int i, int j)
 void	move_d(t_game *game, int i, int j)
 {
 	game->img->pstart = game->img->pright;
-	if (game->map[i][j + 1] == 'E' && game->coins == 0)
+	if ((game->map[i][j + 1] == 'E' && game->coins == 0)
+		|| game->map[i][j + 1] == 'G')
 		free_mlx(game);
 	if (game->map[i][j + 1] != '1' && game->map[i][j + 1] != 'E')
 	{
@@ -60,7 +61,6 @@ void	move_d(t_game *game, int i, int j)
 		game->moves++;
 		game->map[i][j + 1] = 'P';
 		game->map[i][j] = '0';
-		ft_printf("Movimiento: %d\n", game->moves);
 	}
 	ft_visualize(game);
 }
@@ -68,7 +68,8 @@ void	move_d(t_game *game, int i, int j)
 void	move_a(t_game *game, int i, int j)
 {
 	game->img->pstart = game->img->pleft;
-	if (game->map[i][j - 1] == 'E' && game->coins == 0)
+	if ((game->map[i][j - 1] == 'E' && game->coins == 0)
+		|| game->map[i][j - 1] == 'G')
 		free_mlx(game);
 	if (game->map[i][j - 1] != '1' && game->map[i][j - 1] != 'E')
 	{
@@ -77,7 +78,6 @@ void	move_a(t_game *game, int i, int j)
 		game->moves++;
 		game->map[i][j - 1] = 'P';
 		game->map[i][j] = '0';
-		ft_printf("Movimiento: %d\n", game->moves);
 	}
 	ft_visualize(game);
 }
@@ -98,7 +98,6 @@ int	key_handler(int key, t_game *game)
 		move_a(game, i, j);
 	else if (key == DOWN)
 		move_s(game, i, j);
-	finder(&i, &j, game, 'E');
-	change_exit(game, i, j);
+	change_exit(game);
 	return (0);
 }

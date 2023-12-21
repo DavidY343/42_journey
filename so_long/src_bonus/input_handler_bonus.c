@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input_handler.c                                    :+:      :+:    :+:   */
+/*   input_handler_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:09:26 by david             #+#    #+#             */
-/*   Updated: 2023/12/21 12:58:33 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2023/12/21 14:09:52 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/so_long.h"
+#include "../headers/so_long_bonus.h"
 /*
 static void	print_map(t_prs *prs)
 {
@@ -38,8 +38,9 @@ static void	check_border(t_prs *prs, char **cpy_map)
 					msg_error_map("No possible solution\n", prs->map);
 			}
 			if (prs->map[i][j] != '1' && prs->map[i][j] != '0' && prs->map[i]
-				[j] != 'C' && prs->map[i][j] != 'P' && prs->map[i][j] != 'E')
-				msg_error_map("Map isn't built a 1, 0, E, P, C\n", prs->map);
+				[j] != 'C' && prs->map[i][j] != 'P' && prs->map[i][j] != 'E'
+				&& prs->map[i][j] != 'G')
+				msg_error_map("Map not built as 1, 0, E, P, C, G\n", prs->map);
 			else if ((i == 0 || j == 0 || i == (prs->height - 1)
 					|| j == (prs->width - 1)) && prs->map[i][j] != '1')
 				msg_error_map("The map isn't surrounded by walls\n", prs->map);
