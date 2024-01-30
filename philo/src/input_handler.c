@@ -26,21 +26,25 @@ int	input_handler(char **inputs)
 {
 	int	i;
 
-	i = 0;
-
+	i = 1;
 	while(inputs[i])
 	{
 		if(check_num(inputs[i]) == 0)
 		{
 			printf("Not a valid number\n");
-			return (0);
+			return (1);
 		}
 		i++;
 	}
-	if (ft_atoi(inputs[0]) > 200)
+	if (ft_atoi(inputs[1]) < 2)
+	{
+		printf("At least 3 philos\n");
+		return (1);
+	}
+	if (ft_atoi(inputs[1]) > 200)
 	{
 		printf("Not more than 200 philo\n");
-		return (0);
+		return (1);
 	}
-	return (1);
+	return (0);
 }

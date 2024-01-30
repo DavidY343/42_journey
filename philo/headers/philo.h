@@ -11,12 +11,23 @@
 
 typedef struct s_philo
 {
-	int	id;
+	int					id;
+	int					x_ate;
+	int					left_fork_id;
+	int					right_fork_id;
+	long long			t_last_meal;
+	pthread_t			thread_id;
 } t_philo;
 
 typedef struct s_data
 {
-	/* data */
+	int	nphilos;
+	int	tdie;
+	int	teat;
+	int tsleep;
+	int neat;
+	t_philo	*philos;
+	pthread_mutex_t	*forks;
 } t_data;
 
 
@@ -27,4 +38,8 @@ int		input_handler(char **inputs);
 char	*ft_itoa(int n);
 int		ft_atoi(const char *nptr);
 size_t	ft_strlen(const char *str);
+
+//INIT_HANDLER.C
+int	init_data(t_data *data, char **argv);
+
 # endif
