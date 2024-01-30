@@ -42,4 +42,7 @@ size_t	ft_strlen(const char *str);
 //INIT_HANDLER.C
 int	init_data(t_data *data, char **argv);
 
+//TIME_HANDLER.C
+long long	current_time(void);
+
 # endif
