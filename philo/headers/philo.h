@@ -16,6 +16,11 @@ typedef struct s_philo
 	int					left_fork_id;
 	int					right_fork_id;
 	long long			t_last_meal;
+	int	tdie;
+	int	teat;
+	int tsleep;
+	int neat;
+	int	nphilos;
 	pthread_t			thread_id;
 } t_philo;
 

@@ -29,6 +29,11 @@ static int	init_philos(t_data *data)
 	while(i < data->nphilos)
 	{
 		// Lo que tenga cada philo
+		data->philos->neat = data->neat;
+		data->philos->tdie = data->tdie;
+		data->philos->teat = data->teat;
+		data->philos->tsleep = data->tsleep;
+		data->philos->nphilos = data->nphilos;
 		i++;
 	}
 	return (0);
