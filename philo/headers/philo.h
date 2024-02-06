@@ -11,11 +11,6 @@
 
 typedef struct s_philo
 {
-	int					id;
-	int					x_ate;
-	int					left_fork_id;
-	int					right_fork_id;
-	long long			t_last_meal;
 	int	tdie;
 	int	teat;
 	int tsleep;

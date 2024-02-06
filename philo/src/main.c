@@ -2,10 +2,18 @@
 
 #include "../headers/philo.h"
 
-int do_philo(t_philo *philo)
+int do_philo(void *philosopher)
 {
-	if (philo->id % 2 == 0)
-		ft_usleep()
+	t_philo	*philo;
+	int		i;
+
+	i = 0;
+	philo = (t_philo *)philosopher;
+	while (philo->neat == -1 || i < philo->neat)
+	{
+
+	}
+
 }
 
 static int	thread_handler(t_data *data)
