@@ -11,12 +11,9 @@
 
 typedef struct s_philo
 {
-	int	tdie;
-	int	teat;
-	int tsleep;
-	int neat;
-	int	nphilos;
+	int	id;
 	pthread_t			thread_id;
+	struct s_data	*datacpy;
 } t_philo;
 
 typedef struct s_data
@@ -28,6 +25,7 @@ typedef struct s_data
 	int neat;
 	t_philo	*philos;
 	pthread_mutex_t	*forks;
+	long long	initial_time;
 } t_data;
 
 

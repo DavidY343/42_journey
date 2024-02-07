@@ -38,7 +38,7 @@ int	input_handler(char **inputs)
 	}
 	if (ft_atoi(inputs[1]) < 2)
 	{
-		printf("At least 3 philos\n");
+		printf("At least 2 philos\n");
 		return (1);
 	}
 	if (ft_atoi(inputs[1]) > 200)

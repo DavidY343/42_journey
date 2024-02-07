@@ -29,11 +29,8 @@ static int	init_philos(t_data *data)
 	while(i < data->nphilos)
 	{
 		// Lo que tenga cada philo
-		data->philos->neat = data->neat;
-		data->philos->tdie = data->tdie;
-		data->philos->teat = data->teat;
-		data->philos->tsleep = data->tsleep;
-		data->philos->nphilos = data->nphilos;
+		data->philos[i].id = i;
+		data->philos[i].datacpy = data;
 		i++;
 	}
 	return (0);
@@ -49,6 +46,7 @@ int	init_data(t_data *data, char **argv)
 		data->neat = ft_atoi(argv[5]);
 	else
 		data->neat = -1;
+	data->initial_time = current_time();
 	data->philos = (t_philo *)malloc(sizeof(t_philo) * data->nphilos);
 	if (!data->philos)
 	{

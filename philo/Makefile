@@ -9,7 +9,7 @@
 
 CC = cc
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 NAME = philo
 
 
@@ -41,19 +41,19 @@ $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(MLX_FLAGS) $(LIBFT_FLAGS)
 	@echo "$(GREEN)[COMPILED PHILO]$(NO_COLOR)"
 
+%.o: %.c
+	@$(CC) $(CFLAGS) -c -o $@ $<
+
 norminette:
 	@echo "$(YELLOW)[CHECKING NORMINETTE]$(NO_COLOR)"
 	@norminette ./src/
 	@norminette ./headers/
 
 fclean: clean
-	@make -s -C $(LIBFT_PATH) fclean
 	@$(RM) $(NAME)
-	@$(RM) $(CACHE)
 	@echo "$(RED)[DELETED]$(NO_COLOR)"
 
 clean:	
-	@make -s -C $(LIBFT_PATH) clean¡
 	@$(RM) $(OBJS)
 
 re: fclean all
