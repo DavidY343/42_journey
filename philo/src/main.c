@@ -2,54 +2,43 @@
 
 #include "../headers/philo.h"
 
-static void	*do_philo(void *philosopher)
+static void	*monitor_philo(void *philosopher)
 {
 	t_philo	*philo;
-	int		i;
 
-	i = 0;
 	philo = (t_philo *)philosopher;
-	
-    while (philo->datacpy->neat == -1 || i < philo->datacpy->neat)
-    {
-        if (philo->id % 2 == 0)
+	while (!philo->datacpy->stop)
+	{
+		pthread_mutex_lock(&philo->mutex);
+		if (!philo->is_eating && current_time() - philo->last_meal > philo->datacpy->tdie)
 		{
-            pthread_mutex_lock(&philo->datacpy->forks[philo->id % philo->datacpy->nphilos]); // left fork
-			printf("%lld %d has taken a fork\n", current_time() - philo->datacpy->initial_time, philo->id);
-            pthread_mutex_lock(&philo->datacpy->forks[(philo->id + 1) % philo->datacpy->nphilos]); // right fork
-			printf("%lld %d has taken a fork\n", current_time() - philo->datacpy->initial_time, philo->id);
-        }
-		else
-		{
-            pthread_mutex_lock(&philo->datacpy->forks[(philo->id + 1) % philo->datacpy->nphilos]); // right fork
-			printf("%lld %d has taken a fork\n", current_time() - philo->datacpy->initial_time, philo->id);
-            pthread_mutex_lock(&philo->datacpy->forks[philo->id % philo->datacpy->nphilos]); // left fork
-			printf("%lld %d has taken a fork\n", current_time() - philo->datacpy->initial_time, philo->id);
-        }
-		
-        printf("%lld %d is eating\n", current_time() - philo->datacpy->initial_time, philo->id);
-        usleep(philo->datacpy->teat * 1000);
-        printf("%lld %d is sleeping\n", current_time() - philo->datacpy->initial_time, philo->id);
-        pthread_mutex_unlock(&philo->datacpy->forks[philo->id % philo->datacpy->nphilos]); // left fork
-        pthread_mutex_unlock(&philo->datacpy->forks[(philo->id + 1) % philo->datacpy->nphilos]); // right fork
-        usleep(philo->datacpy->tsleep * 1000);
-        printf("%lld %d is thinking\n", current_time() - philo->datacpy->initial_time, philo->id);
-        i++;
-    }
+			printf("%lld %d died\n", current_time() - philo->datacpy->initial_time, philo->id);
+			philo->datacpy->stop = 1;
+			pthread_mutex_unlock(&philo->mutex);
+			return (NULL);
+		}
+		pthread_mutex_unlock(&philo->mutex);
+		usleep(1000);
+	}
 	return (NULL);
 }
+
 
 static int	thread_handler(t_data *data)
 {
 	int	i;
 
 	i = 0;
-	usleep(5000);
 	while (i < data->nphilos)
 	{
 		if (pthread_create(&data->philos[i].thread_id, NULL, do_philo, &data->philos[i]) != 0)
 		{
 			printf("Error creating thread\n");
+			return (1);
+		}
+		if (pthread_create(&data->philos[i].monitor_thread_id, NULL, monitor_philo, &data->philos[i]) != 0)
+		{
+			printf("Error creating monitor thread\n");
 			return (1);
 		}
 		i++;
@@ -64,6 +53,17 @@ static int	thread_handler(t_data *data)
 		}
 		i++;
 	}
+	i = 0;
+	// Destruye los mutexes
+	while(i < data->nphilos)
+	{
+        pthread_mutex_destroy(&data->philos[i].mutex);
+        pthread_mutex_destroy(&data->forks[i]);
+		i++;
+    }
+    // Libera la memoria asignada para los filósofos y los mutexes
+    free(data->philos);
+    free(data->forks);
 	return (0);
 }
 

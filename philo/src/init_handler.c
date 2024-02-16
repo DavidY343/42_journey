@@ -16,6 +16,11 @@ static int	init_mutex(t_data *data)
 			printf("Init error forks\n");
 			return (1);
 		}
+		if(pthread_mutex_init(&data->philos[i].mutex, NULL) != 0)
+		{
+			printf("Init error mutex philos\n");
+			return (1);
+		}
 		i++;
 	}
 	return (0);
@@ -26,11 +31,14 @@ static int	init_philos(t_data *data)
 	int	i;
 
 	i = 0;
+	data->stop = 0;
 	while(i < data->nphilos)
 	{
 		// Lo que tenga cada philo
 		data->philos[i].id = i;
 		data->philos[i].datacpy = data;
+		data->philos[i].last_meal = current_time();
+		data->philos[i].is_eating = 0;
 		i++;
 	}
 	return (0);

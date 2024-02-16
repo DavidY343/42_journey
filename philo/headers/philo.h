@@ -12,7 +12,11 @@
 typedef struct s_philo
 {
 	int	id;
+	int	is_eating;
 	pthread_t			thread_id;
+	pthread_t			monitor_thread_id;
+	pthread_mutex_t	mutex;
+	long long		last_meal;
 	struct s_data	*datacpy;
 } t_philo;
 
@@ -23,6 +27,7 @@ typedef struct s_data
 	int	teat;
 	int tsleep;
 	int neat;
+	int	stop;
 	t_philo	*philos;
 	pthread_mutex_t	*forks;
 	long long	initial_time;
@@ -42,5 +47,8 @@ int	init_data(t_data *data, char **argv);
 
 //TIME_HANDLER.C
 long long	current_time(void);
+
+//PHILO_HANDLER.C
+void	*do_philo(void *philosopher);
 
 # endif
