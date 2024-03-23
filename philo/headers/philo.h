@@ -15,7 +15,6 @@ typedef struct s_philo
 	int	is_eating;
 	pthread_t			thread_id;
 	pthread_t			monitor_thread_id;
-	pthread_mutex_t	mutex;
 	long long		last_meal;
 	struct s_data	*datacpy;
 } t_philo;
@@ -30,6 +29,10 @@ typedef struct s_data
 	int	stop;
 	t_philo	*philos;
 	pthread_mutex_t	*forks;
+	pthread_mutex_t	m_stop;
+	pthread_mutex_t	m_printf;
+	pthread_mutex_t	m_eating;
+	pthread_mutex_t	dead;
 	long long	initial_time;
 } t_data;
 

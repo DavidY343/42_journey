@@ -9,15 +9,18 @@ static void	*monitor_philo(void *philosopher)
 	philo = (t_philo *)philosopher;
 	while (!philo->datacpy->stop)
 	{
-		pthread_mutex_lock(&philo->mutex);
+		pthread_mutex_lock(&philo->datacpy->m_stop);
+		pthread_mutex_lock(&philo->datacpy->m_eating);		
 		if (!philo->is_eating && current_time() - philo->last_meal > philo->datacpy->tdie)
 		{
 			printf("%lld %d died\n", current_time() - philo->datacpy->initial_time, philo->id);
 			philo->datacpy->stop = 1;
-			pthread_mutex_unlock(&philo->mutex);
+			pthread_mutex_unlock(&philo->datacpy->m_stop);
+			pthread_mutex_unlock(&philo->datacpy->m_eating);
 			return (NULL);
 		}
-		pthread_mutex_unlock(&philo->mutex);
+		pthread_mutex_unlock(&philo->datacpy->m_stop);
+		pthread_mutex_unlock(&philo->datacpy->m_eating);
 		usleep(1000);
 	}
 	return (NULL);
@@ -57,10 +60,13 @@ static int	thread_handler(t_data *data)
 	// Destruye los mutexes
 	while(i < data->nphilos)
 	{
-        pthread_mutex_destroy(&data->philos[i].mutex);
         pthread_mutex_destroy(&data->forks[i]);
 		i++;
     }
+	pthread_mutex_destroy(&data->m_eating);
+	pthread_mutex_destroy(&data->m_printf);
+	pthread_mutex_destroy(&data->m_stop);
+	pthread_mutex_destroy(&data->dead);
     // Libera la memoria asignada para los filósofos y los mutexes
     free(data->philos);
     free(data->forks);
