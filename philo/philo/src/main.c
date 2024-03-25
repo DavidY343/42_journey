@@ -19,24 +19,25 @@ static void	*monitor_philo(void *philosopher)
 
 	i = 0;
 	philo = (t_philo *)philosopher;
+	pthread_mutex_lock(&(philo->datacpy->m_stop));
 	while (!philo->datacpy->stop
 		&& (philo->datacpy->neat == -1 || i < philo->datacpy->neat))
 	{
+		pthread_mutex_unlock(&(philo->datacpy->m_stop));
 		pthread_mutex_lock(&philo->m_eating);
 		if (!philo->is_eating && current_time()
 			- philo->last_meal >= philo->datacpy->tdie)
 		{
 			my_print(philo->datacpy, philo->id, "died");
-			pthread_mutex_lock(&philo->datacpy->m_stop);
-			philo->datacpy->stop = 1;
-			pthread_mutex_unlock(&philo->datacpy->m_stop);
 			pthread_mutex_unlock(&philo->m_eating);
 			return (NULL);
 		}
 		pthread_mutex_unlock(&philo->m_eating);
 		usleep(1000);
 		i++;
+		pthread_mutex_lock(&(philo->datacpy->m_stop));
 	}
+	pthread_mutex_unlock(&(philo->datacpy->m_stop));
 	return (NULL);
 }
 
@@ -52,6 +53,8 @@ static int	thread_handler_two(t_data *data)
 			printf("Error waiting thread\n");
 			return (1);
 		}
+		if (pthread_join(data->philos[i].monitor_thread_id, NULL) != 0)
+			return (1);
 		i++;
 	}
 	while (i < data->nphilos)

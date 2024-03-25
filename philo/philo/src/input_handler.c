@@ -39,9 +39,9 @@ static int	input_handler_two(char **inputs)
 	i = 2;
 	while (i < 5)
 	{
-		if (ft_atoi(inputs[i]) < 60)
+		if (ft_atoi(inputs[i]) < 1)
 		{
-			printf("Not lower than 60ms\n");
+			printf("Not valid\n");
 			return (1);
 		}
 		i++;
@@ -66,11 +66,6 @@ int	input_handler(char **inputs)
 	if (ft_atoi(inputs[1]) < 1)
 	{
 		printf("At least 1 philo\n");
-		return (1);
-	}
-	if (ft_atoi(inputs[1]) > 200)
-	{
-		printf("Not more than 200 philo\n");
 		return (1);
 	}
 	if (input_handler_two(inputs) == 1)

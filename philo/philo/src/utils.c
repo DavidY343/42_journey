@@ -52,16 +52,30 @@ int	ft_atoi(const char *nptr)
 	return (result * sign);
 }
 
+static int	my_strcmp(const char *str1, const char *str2)
+{
+	while (*str1 && *str2 && *str1 == *str2)
+	{
+		str1++;
+		str2++;
+	}
+	return (*(unsigned char *)str1 - *(unsigned char *)str2);
+}
+
 void	my_print(t_data *data, int id, char *message)
 {
+	pthread_mutex_lock(&(data->m_stop));
 	pthread_mutex_lock(&(data->m_print));
-	if (data->stop == 0)
+	if (!data->stop)
 	{
+		if (my_strcmp(message, "died") == 0)
+			data->stop = 1;
 		printf("%lld ", current_time() - data->initial_time);
 		printf("%d ", id + 1);
 		printf("%s\n", message);
 	}
 	pthread_mutex_unlock(&(data->m_print));
+	pthread_mutex_unlock(&(data->m_stop));
 }
 
 long long	current_time(void)

@@ -30,7 +30,9 @@ static void	philo_eat_think_sleep(t_philo *philo)
 	philo->last_meal = current_time();
 	pthread_mutex_unlock(&philo->m_eating);
 	usleep(philo->datacpy->teat * 1000);
+	pthread_mutex_lock(&philo->m_eating);
 	philo->is_eating = 0;
+	pthread_mutex_unlock(&philo->m_eating);
 	pthread_mutex_unlock(&(philo->datacpy->forks[philo->l_fork]));
 	pthread_mutex_unlock(&(philo->datacpy->forks[philo->r_fork]));
 	my_print(philo->datacpy, philo->id, "is sleeping");
@@ -54,6 +56,7 @@ void	*do_philo(void *philosopher)
 		pthread_mutex_unlock(&philo->datacpy->m_stop);
 		philo_eat_think_sleep(philo);
 		i++;
+		pthread_mutex_lock(&philo->datacpy->m_stop);
 	}
 	pthread_mutex_unlock(&philo->datacpy->m_stop);
 	return (NULL);
