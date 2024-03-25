@@ -12,50 +12,30 @@
 
 #include "../headers/philo.h"
 
-//[philo->id % philo->datacpy->nphilos]); es el left y el otro el right
-static void	philo_fork(t_philo *philo)
+static void	philo_eat_think_sleep(t_philo *philo)
 {
-	if (philo->id % 2 == 0)
+	pthread_mutex_lock(&(philo->datacpy->forks[philo->l_fork]));
+	my_print(philo->datacpy, philo->id, "has taken a fork");
+	if (philo->datacpy->nphilos == 1)
 	{
-		pthread_mutex_lock(&philo->datacpy
-			->forks[philo->id % philo->datacpy->nphilos]);
-		printf("%lld %d has taken a fork\n", current_time()
-			- philo->datacpy->initial_time, philo->id);
-		pthread_mutex_lock(&philo->datacpy
-			->forks[(philo->id + 1) % philo->datacpy->nphilos]);
-		printf("%lld %d has taken a fork\n", current_time()
-			- philo->datacpy->initial_time, philo->id);
+		usleep(philo->datacpy->tdie * 1000);
+		pthread_mutex_unlock(&(philo->datacpy->forks[philo->l_fork]));
+		return ;
 	}
-	else
-	{
-		pthread_mutex_lock(&philo->datacpy
-			->forks[(philo->id + 1) % philo->datacpy->nphilos]);
-		printf("%lld %d has taken a fork\n", current_time()
-			- philo->datacpy->initial_time, philo->id);
-		pthread_mutex_lock(&philo->datacpy
-			->forks[philo->id % philo->datacpy->nphilos]);
-		printf("%lld %d has taken a fork\n", current_time()
-			- philo->datacpy->initial_time, philo->id);
-	}
-}
-
-static void	philo_eat_think(t_philo *philo)
-{
-	pthread_mutex_lock(&philo->datacpy->m_eating);
-	printf("%lld %d is eating\n", current_time()
-		- philo->datacpy->initial_time, philo->id);
+	pthread_mutex_lock(&(philo->datacpy->forks[philo->r_fork]));
+	my_print(philo->datacpy, philo->id, "has taken a fork");
+	pthread_mutex_lock(&philo->m_eating);
+	my_print(philo->datacpy, philo->id, "is eating");
 	philo->is_eating = 1;
 	philo->last_meal = current_time();
-	pthread_mutex_unlock(&philo->datacpy->m_eating);
+	pthread_mutex_unlock(&philo->m_eating);
 	usleep(philo->datacpy->teat * 1000);
 	philo->is_eating = 0;
-	pthread_mutex_unlock(&philo->datacpy
-		->forks[philo->id % philo->datacpy->nphilos]);
-	pthread_mutex_unlock(&philo->datacpy
-		->forks[(philo->id + 1) % philo->datacpy->nphilos]);
+	pthread_mutex_unlock(&(philo->datacpy->forks[philo->l_fork]));
+	pthread_mutex_unlock(&(philo->datacpy->forks[philo->r_fork]));
+	my_print(philo->datacpy, philo->id, "is sleeping");
 	usleep(philo->datacpy->tsleep * 1000);
-	printf("%lld %d is thinking\n", current_time()
-		- philo->datacpy->initial_time, philo->id);
+	my_print(philo->datacpy, philo->id, "is thinking");
 }
 
 void	*do_philo(void *philosopher)
@@ -65,14 +45,16 @@ void	*do_philo(void *philosopher)
 
 	philo = (t_philo *)philosopher;
 	i = 0;
-	if (philo->id % 2 == 0)
-		usleep(philo->datacpy->teat - 1);
+	if ((philo->id - 1) % 2 == 0)
+		usleep((philo->datacpy->teat - 1) * 1000);
+	pthread_mutex_lock(&philo->datacpy->m_stop);
 	while (!philo->datacpy->stop
 		&& (philo->datacpy->neat == -1 || i < philo->datacpy->neat))
 	{
-		philo_fork(philo);
-		philo_eat_think(philo);
+		pthread_mutex_unlock(&philo->datacpy->m_stop);
+		philo_eat_think_sleep(philo);
 		i++;
 	}
+	pthread_mutex_unlock(&philo->datacpy->m_stop);
 	return (NULL);
 }

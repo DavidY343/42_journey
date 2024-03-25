@@ -27,6 +27,9 @@ typedef struct s_philo
 	pthread_t		thread_id;
 	pthread_t		monitor_thread_id;
 	long long		last_meal;
+	pthread_mutex_t	m_eating;
+	int				l_fork;
+	int				r_fork;
 	struct s_data	*datacpy;
 }	t_philo;
 
@@ -39,11 +42,9 @@ typedef struct s_data
 	int				neat;
 	int				stop;
 	t_philo			*philos;
-	pthread_mutex_t	*forks;
 	pthread_mutex_t	m_stop;
-	pthread_mutex_t	m_printf;
-	pthread_mutex_t	m_eating;
-	pthread_mutex_t	dead;
+	pthread_mutex_t	m_print;
+	pthread_mutex_t	*forks;
 	long long		initial_time;
 }	t_data;
 
@@ -53,12 +54,11 @@ int			input_handler(char **inputs);
 //UTILS.C
 int			ft_atoi(const char *nptr);
 size_t		ft_strlen(const char *str);
+long long	current_time(void);
+void		my_print(t_data *data, int id, char *message);
 
 //INIT_HANDLER.C
 int			init_data(t_data *data, char **argv);
-
-//TIME_HANDLER.C
-long long	current_time(void);
 
 //PHILO_HANDLER.C
 void		*do_philo(void *philosopher);

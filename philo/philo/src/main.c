@@ -15,25 +15,27 @@
 static void	*monitor_philo(void *philosopher)
 {
 	t_philo	*philo;
+	int		i;
 
+	i = 0;
 	philo = (t_philo *)philosopher;
-	while (!philo->datacpy->stop)
+	while (!philo->datacpy->stop
+		&& (philo->datacpy->neat == -1 || i < philo->datacpy->neat))
 	{
-		pthread_mutex_lock(&philo->datacpy->m_stop);
-		pthread_mutex_lock(&philo->datacpy->m_eating);
+		pthread_mutex_lock(&philo->m_eating);
 		if (!philo->is_eating && current_time()
-			- philo->last_meal > philo->datacpy->tdie)
+			- philo->last_meal >= philo->datacpy->tdie)
 		{
-			printf("%lld %d died\n", current_time()
-				- philo->datacpy->initial_time, philo->id);
+			my_print(philo->datacpy, philo->id, "died");
+			pthread_mutex_lock(&philo->datacpy->m_stop);
 			philo->datacpy->stop = 1;
 			pthread_mutex_unlock(&philo->datacpy->m_stop);
-			pthread_mutex_unlock(&philo->datacpy->m_eating);
+			pthread_mutex_unlock(&philo->m_eating);
 			return (NULL);
 		}
-		pthread_mutex_unlock(&philo->datacpy->m_stop);
-		pthread_mutex_unlock(&philo->datacpy->m_eating);
+		pthread_mutex_unlock(&philo->m_eating);
 		usleep(1000);
+		i++;
 	}
 	return (NULL);
 }
@@ -55,12 +57,9 @@ static int	thread_handler_two(t_data *data)
 	while (i < data->nphilos)
 	{
 		pthread_mutex_destroy(&data->forks[i]);
+		pthread_mutex_destroy(&data->philos[i].m_eating);
 		i++;
 	}
-	pthread_mutex_destroy(&data->m_eating);
-	pthread_mutex_destroy(&data->m_printf);
-	pthread_mutex_destroy(&data->m_stop);
-	pthread_mutex_destroy(&data->dead);
 	free(data->philos);
 	free(data->forks);
 	return (0);

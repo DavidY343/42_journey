@@ -51,3 +51,23 @@ int	ft_atoi(const char *nptr)
 	}
 	return (result * sign);
 }
+
+void	my_print(t_data *data, int id, char *message)
+{
+	pthread_mutex_lock(&(data->m_print));
+	if (data->stop == 0)
+	{
+		printf("%lld ", current_time() - data->initial_time);
+		printf("%d ", id + 1);
+		printf("%s\n", message);
+	}
+	pthread_mutex_unlock(&(data->m_print));
+}
+
+long long	current_time(void)
+{
+	struct timeval	t;
+
+	gettimeofday(&t, NULL);
+	return ((t.tv_sec * 1000) + (t.tv_usec / 1000));
+}

@@ -9,7 +9,7 @@
 
 CC = cc
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 NAME = philo
 
 
@@ -17,7 +17,7 @@ NAME = philo
 #      SOURCES       #
 ######################
 
-SRCS_PHILO			=	main.c utils.c time_handler.c input_handler.c init_handler.c philo_handler.c
+SRCS_PHILO			=	main.c utils.c input_handler.c init_handler.c philo_handler.c
 DIR_PHILO			=	$(addprefix ./src/, $(SRCS_PHILO))
 OBJS				= 	$(DIR_PHILO:.c=.o)
 

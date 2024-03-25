@@ -19,13 +19,15 @@ static int	init_mutex(t_data *data)
 
 	i = 0;
 	if (pthread_mutex_init(&data->m_stop, NULL) != 0)
+	{
+		printf("Init error mutex stop\n");
 		return (1);
-	if (pthread_mutex_init(&data->m_eating, NULL) != 0)
+	}
+	if (pthread_mutex_init(&data->m_print, NULL) != 0)
+	{
+		printf("Init error mutex stop\n");
 		return (1);
-	if (pthread_mutex_init(&data->m_printf, NULL) != 0)
-		return (1);
-	if (pthread_mutex_init(&data->dead, NULL) != 0)
-		return (1);
+	}
 	while (i < data->nphilos)
 	{
 		if (pthread_mutex_init(&data->forks[i], NULL) != 0)
@@ -46,10 +48,17 @@ static int	init_philos(t_data *data)
 	data->stop = 0;
 	while (i < data->nphilos)
 	{
+		if (pthread_mutex_init(&data->philos[i].m_eating, NULL) != 0)
+		{
+			printf("Init eating mutex\n");
+			return (1);
+		}
 		data->philos[i].id = i;
 		data->philos[i].datacpy = data;
 		data->philos[i].last_meal = current_time();
 		data->philos[i].is_eating = 0;
+		data->philos[i].l_fork = i;
+		data->philos[i].r_fork = (i + 1) % data->nphilos;
 		i++;
 	}
 	return (0);
