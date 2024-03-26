@@ -33,8 +33,8 @@ static void	philo_eat_think_sleep(t_philo *philo)
 	pthread_mutex_lock(&philo->m_eating);
 	philo->is_eating = 0;
 	pthread_mutex_unlock(&philo->m_eating);
-	pthread_mutex_unlock(&(philo->datacpy->forks[philo->l_fork]));
 	pthread_mutex_unlock(&(philo->datacpy->forks[philo->r_fork]));
+	pthread_mutex_unlock(&(philo->datacpy->forks[philo->l_fork]));
 	my_print(philo->datacpy, philo->id, "is sleeping");
 	usleep(philo->datacpy->tsleep * 1000);
 	my_print(philo->datacpy, philo->id, "is thinking");
