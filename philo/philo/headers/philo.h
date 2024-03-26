@@ -6,7 +6,7 @@
 /*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 17:04:08 by dyanez-m          #+#    #+#             */
-/*   Updated: 2024/03/24 17:08:56 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2024/03/26 19:00:30 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_philo
 	int				l_fork;
 	int				r_fork;
 	struct s_data	*datacpy;
+	int				finished;
 }	t_philo;
 
 typedef struct s_data
@@ -44,6 +45,7 @@ typedef struct s_data
 	t_philo			*philos;
 	pthread_mutex_t	m_stop;
 	pthread_mutex_t	m_print;
+	pthread_mutex_t	m_finish;
 	pthread_mutex_t	*forks;
 	long long		initial_time;
 }	t_data;

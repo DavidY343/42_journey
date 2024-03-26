@@ -6,7 +6,7 @@
 /*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 17:27:12 by dyanez-m          #+#    #+#             */
-/*   Updated: 2024/03/24 17:30:57 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2024/03/26 19:01:11 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,11 @@ static int	init_mutex(t_data *data)
 
 	i = 0;
 	if (pthread_mutex_init(&data->m_stop, NULL) != 0)
-	{
-		printf("Init error mutex stop\n");
 		return (1);
-	}
 	if (pthread_mutex_init(&data->m_print, NULL) != 0)
-	{
-		printf("Init error mutex stop\n");
 		return (1);
-	}
+	if (pthread_mutex_init(&data->m_finish, NULL) != 0)
+		return (1);
 	while (i < data->nphilos)
 	{
 		if (pthread_mutex_init(&data->forks[i], NULL) != 0)
@@ -53,6 +49,7 @@ static int	init_philos(t_data *data)
 			printf("Init eating mutex\n");
 			return (1);
 		}
+		data->philos[i].finished = 0;
 		data->philos[i].id = i;
 		data->philos[i].datacpy = data;
 		data->philos[i].last_meal = current_time();

@@ -6,7 +6,7 @@
 /*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 17:34:10 by dyanez-m          #+#    #+#             */
-/*   Updated: 2024/03/24 18:05:21 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2024/03/26 19:41:47 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 static void	*monitor_philo(void *philosopher)
 {
 	t_philo	*philo;
-	int		i;
 
-	i = 0;
 	philo = (t_philo *)philosopher;
 	pthread_mutex_lock(&(philo->datacpy->m_stop));
-	while (!philo->datacpy->stop
-		&& (philo->datacpy->neat == -1 || i < philo->datacpy->neat))
+	pthread_mutex_lock(&(philo->datacpy->m_finish));
+	while (!philo->datacpy->stop && (philo->datacpy->neat == -1
+			|| philo->finished == 0))
 	{
+		pthread_mutex_unlock(&(philo->datacpy->m_finish));
 		pthread_mutex_unlock(&(philo->datacpy->m_stop));
 		pthread_mutex_lock(&philo->m_eating);
 		if (!philo->is_eating && current_time()
@@ -33,10 +33,10 @@ static void	*monitor_philo(void *philosopher)
 			return (NULL);
 		}
 		pthread_mutex_unlock(&philo->m_eating);
-		usleep(1000);
-		i++;
 		pthread_mutex_lock(&(philo->datacpy->m_stop));
+		pthread_mutex_lock(&(philo->datacpy->m_finish));
 	}
+	pthread_mutex_unlock(&(philo->datacpy->m_finish));
 	pthread_mutex_unlock(&(philo->datacpy->m_stop));
 	return (NULL);
 }

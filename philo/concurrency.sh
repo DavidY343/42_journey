@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Definir el número de ejecuciones
-num_ejecuciones=200
+num_ejecuciones=50
 
 # Nombre del archivo de salida
 output_file="output.txt"
@@ -10,7 +10,7 @@ output_file="output.txt"
 i=1
 while [ $i -le $num_ejecuciones ]; do
     # Ejecutar el programa y redirigir la salida al archivo
-    ./philo 4 201 100 100 > infile
+    ./philo 4 410 200 200 > infile
 
     # Contar el número de ocurrencias de "died" en todo el archivo
     ocurrencias=$(grep -o "died" infile | wc -l)

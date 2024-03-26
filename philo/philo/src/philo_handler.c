@@ -6,7 +6,7 @@
 /*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 17:52:05 by dyanez-m          #+#    #+#             */
-/*   Updated: 2024/03/24 17:59:15 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2024/03/26 19:03:31 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	*do_philo(void *philosopher)
 	philo = (t_philo *)philosopher;
 	i = 0;
 	if ((philo->id - 1) % 2 == 0)
-		usleep((philo->datacpy->teat - 1) * 1000);
+		usleep((philo->datacpy->teat - 10) * 1000);
 	pthread_mutex_lock(&philo->datacpy->m_stop);
 	while (!philo->datacpy->stop
 		&& (philo->datacpy->neat == -1 || i < philo->datacpy->neat))
@@ -58,6 +58,10 @@ void	*do_philo(void *philosopher)
 		i++;
 		pthread_mutex_lock(&philo->datacpy->m_stop);
 	}
+	pthread_mutex_lock(&(philo->datacpy->m_finish));
+	if (i == philo->datacpy->neat)
+		philo->finished = 1;
+	pthread_mutex_unlock(&(philo->datacpy->m_finish));
 	pthread_mutex_unlock(&philo->datacpy->m_stop);
 	return (NULL);
 }
