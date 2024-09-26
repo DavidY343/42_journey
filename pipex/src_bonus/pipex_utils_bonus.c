@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_utils_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dyanez-m <dyanez-m@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 16:02:56 by dyanez-m          #+#    #+#             */
-/*   Updated: 2023/10/16 11:52:31 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2024/07/31 17:05:25 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	msg_error(char *text)
 {
 	perror(text);
-	exit(1);
+	exit(0);
 }
 
 void	ft_free(char **string)

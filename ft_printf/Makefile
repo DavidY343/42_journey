@@ -26,7 +26,7 @@ $(NAME):	$(OBJ)
 			cp libft/libft.a .
 			mv libft.a $(NAME)
 			$(AR) $(NAME) $(OBJ)
-	
+
 clean:
 			$(RM) $(OBJ)
 			make clean -C $(LIBFT)
