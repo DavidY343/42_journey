@@ -3,60 +3,106 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 21:25:59 by david             #+#    #+#             */
-/*   Updated: 2024/09/26 22:18:08 by david            ###   ########.fr       */
+/*   Updated: 2024/10/01 21:00:59 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 #include <sstream>
 
+static std::string recieveString(std::string msg)
+{
+	std::string input;
+
+	while (1)
+	{
+		std::cout << msg;
+		std::getline(std::cin, input);
+		if (std::cin.eof())
+		{
+			std::cout << "Unexpected EOF" << std::endl;
+			break ;
+		}
+		if (input == "")
+		{
+			continue ;
+		}
+		else
+		{
+			return (input);
+		}
+	}
+	return ("");
+}
+
 static void addContact(PhoneBook &phoneBook)
 {
 	Contact	contact;
 	std::string	input;
 
-	std::cout << "Enter first name: ";
-	std::getline(std::cin, input);
+	input = recieveString("Enter first name: ");
+	if (input == "")
+		return ;
 	contact.setFirstName(input);
-	std::cout << "Enter last name: ";
-	std::getline(std::cin, input);
+	input = recieveString("Enter last name: ");
+	if (input == "")
+		return ;
 	contact.setLastName(input);
-	std::cout << "Enter nickname: ";
-	std::getline(std::cin, input);
+	input = recieveString("Enter nickname: ");
+	if (input == "")
+		return ;
 	contact.setNickname(input);
-	std::cout << "Enter phone number: ";
-	std::getline(std::cin, input);
+	input = recieveString("Enter phone number: ");
+	if (input == "")
+		return ;
 	contact.setPhoneNumber(input);
-	std::cout << "Enter darkest secret: ";
-	std::getline(std::cin, input);
+	input = recieveString("Enter darkest secret: ");
+	if (input == "")
+		return ;
 	contact.setDarkestSecret(input);
 	phoneBook.addContact(contact);
 }
 
+static void searchContact(PhoneBook &phoneBook)
+{
+	int	index;
+
+	phoneBook.displayContacts();
+	std::cout << "Enter index to display: ";
+	if (!(std::cin >> index))
+	{
+		std::cin.clear();
+		std::cout << "Not the right input" << std::endl;
+		return ;
+	}
+	phoneBook.displayContact(index);
+}
 int main(void)
 {
 	PhoneBook	phoneBook;
 	std::string	input;
-	int			index;
 
 	input = "";
 	while (1)
 	{
 		std::cout << "Enter INPUT: ";
 		std::getline(std::cin, input);
-		if (input == "ADD")
+		if (std::cin.eof())
+		{
+			std::cout << "Unexpected EOF" << std::endl;
+			break ;
+		}
+		else if (input == "ADD")
 		{
 			addContact(phoneBook);
 		}
         else if (input == "SEARCH")
         {
-            phoneBook.displayContacts();
-            std::cout << "Enter index to display: ";
-            std::cin >> index;
-            phoneBook.displayContact(index);
+			searchContact(phoneBook);
+			std::cin.ignore(1000, '\n');
         }
 		else if (input == "EXIT")
 		{

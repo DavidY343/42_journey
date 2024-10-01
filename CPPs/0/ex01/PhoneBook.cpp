@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 20:40:12 by david             #+#    #+#             */
-/*   Updated: 2024/09/26 22:12:53 by david            ###   ########.fr       */
+/*   Updated: 2024/10/01 21:06:50 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,10 @@ PhoneBook::~PhoneBook()
 
 void	PhoneBook::addContact(Contact contact)
 {
-	int	i;
+	static int	i = 0;
 
-	i = 0;
-	while (i < 8)
-	{
-		if (this->_contacts[i].getFirstName().empty())
-		{
-			this->_contacts[i] = contact;
-			break ;
-		}
-		i++;
-	}
+	this->_contacts[i % 8] = contact;
+	i++;
 }
 
 Contact	PhoneBook::getContact(int index)
