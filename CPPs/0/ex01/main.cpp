@@ -6,7 +6,7 @@
 /*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 21:25:59 by david             #+#    #+#             */
-/*   Updated: 2024/10/01 21:00:59 by dyanez-m         ###   ########.fr       */
+/*   Updated: 2024/10/27 17:33:28 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,18 +66,47 @@ static void addContact(PhoneBook &phoneBook)
 	phoneBook.addContact(contact);
 }
 
+static int getInput(int& index)
+{
+	std::cout << "Enter index to display: ";
+	std::string input;
+	std::cin.clear();
+	std::getline(std::cin, input);
+
+	if (input.empty())
+	{
+		std::cout << "Not the right input. Please enter a valid number." << std::endl;
+		return (0);
+	}
+	else
+	{
+		std::istringstream iss(input);
+		if (iss >> index)
+		{
+			return (1);
+		}
+		else
+		{
+			std::cout << "Not the right input. Please enter a valid number." << std::endl;
+			return (0);
+		}
+	}
+}
+
 static void searchContact(PhoneBook &phoneBook)
 {
 	int	index;
 
 	phoneBook.displayContacts();
-	std::cout << "Enter index to display: ";
-	if (!(std::cin >> index))
+	//std::cout << "Enter index to display: ";
+	/*if (!(std::cin >> index))
 	{
 		std::cin.clear();
 		std::cout << "Not the right input" << std::endl;
 		return ;
-	}
+	}*/
+ 	if (getInput(index) == 0)
+		return ;
 	phoneBook.displayContact(index);
 }
 int main(void)
@@ -89,6 +118,7 @@ int main(void)
 	while (1)
 	{
 		std::cout << "Enter INPUT: ";
+		std::cin.clear();
 		std::getline(std::cin, input);
 		if (std::cin.eof())
 		{
@@ -102,7 +132,6 @@ int main(void)
         else if (input == "SEARCH")
         {
 			searchContact(phoneBook);
-			std::cin.ignore(1000, '\n');
         }
 		else if (input == "EXIT")
 		{

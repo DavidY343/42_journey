@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 20:40:50 by david             #+#    #+#             */
-/*   Updated: 2024/09/26 22:13:02 by david            ###   ########.fr       */
+/*   Updated: 2024/10/27 15:14:01 by dyanez-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "Contact.hpp"
 # include <iomanip>
+#include <iostream>
 
 std::string truncateString(const std::string &str);
 
