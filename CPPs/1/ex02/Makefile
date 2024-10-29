@@ -6,7 +6,7 @@
 #    By: david <david@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/26 12:29:08 by david             #+#    #+#              #
-#    Updated: 2024/10/29 17:38:04 by david            ###   ########.fr        #
+#    Updated: 2024/10/29 17:38:43 by david            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,13 +17,13 @@
 CC = c++
 RM = rm -f
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98
-NAME = exec
+NAME = brain
 
 ######################
 #      SOURCES       #
 ######################
 
-NAMES	= Account  tests
+NAMES	= main
 SRC = $(addsuffix .cpp, $(NAMES))
 OBJ = $(SRC:.cpp=.o)
 

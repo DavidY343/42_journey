@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dyanez-m <dyanez-m@student.42.fr>          +#+  +:+       +#+         #
+#    By: david <david@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/26 12:29:08 by david             #+#    #+#              #
-#    Updated: 2024/10/27 15:07:26 by dyanez-m         ###   ########.fr        #
+#    Updated: 2024/10/29 17:38:09 by david            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,10 +43,15 @@ NO_COLOR                        =       \033[0m
 all: $(NAME)
 
 $(NAME): $(OBJ)
-		@echo "$(YELLOW)[COMPILING EX00]$(NO_COLOR)"
-		$(CC) $(CPPFLAGS) -o $(NAME) $(OBJ)
-		@echo "$(GREEN)[COMPILED EX00]$(NO_COLOR)"
+		@echo "$(YELLOW)[COMPILING EX01]$(NO_COLOR)"
+		@$(CC) $(CPPFLAGS) -o $(NAME) $(OBJ)
+		@echo "$(GREEN)[COMPILED EX01]$(NO_COLOR)"
 
+
+$(OBJ): $(SRC)
+		@echo "$(YELLOW)[COMPILING OBJS]$(NO_COLOR)"
+		@$(CC) $(CPPFLAGS) -c $(SRC)
+		@echo "$(GREEN)[COMPILED OBJS]$(NO_COLOR)"
 
 fclean: clean
 		@$(RM) $(NAME)

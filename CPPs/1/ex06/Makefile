@@ -6,7 +6,7 @@
 #    By: david <david@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/26 12:29:08 by david             #+#    #+#              #
-#    Updated: 2024/10/29 17:38:04 by david            ###   ########.fr        #
+#    Updated: 2024/10/29 20:17:22 by david            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,13 +17,13 @@
 CC = c++
 RM = rm -f
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98
-NAME = exec
+NAME = harlFilter
 
 ######################
 #      SOURCES       #
 ######################
 
-NAMES	= Account  tests
+NAMES	= main harl
 SRC = $(addsuffix .cpp, $(NAMES))
 OBJ = $(SRC:.cpp=.o)
 
@@ -43,9 +43,9 @@ NO_COLOR                        =       \033[0m
 all: $(NAME)
 
 $(NAME): $(OBJ)
-		@echo "$(YELLOW)[COMPILING EX02]$(NO_COLOR)"
+		@echo "$(YELLOW)[COMPILING EX06]$(NO_COLOR)"
 		@$(CC) $(CPPFLAGS) -o $(NAME) $(OBJ)
-		@echo "$(GREEN)[COMPILED EX02]$(NO_COLOR)"
+		@echo "$(GREEN)[COMPILED EX06]$(NO_COLOR)"
 
 
 $(OBJ): $(SRC)

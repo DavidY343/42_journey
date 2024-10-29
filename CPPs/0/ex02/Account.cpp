@@ -6,7 +6,7 @@
 /*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 13:13:09 by david             #+#    #+#             */
-/*   Updated: 2024/10/27 13:13:20 by david            ###   ########.fr       */
+/*   Updated: 2024/10/28 13:43:19 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,11 @@ int	Account::checkAmount(void) const
 
 void	Account::_displayTimestamp(void)
 {
-	time_t	now;
-
-	now = time(NULL);
-	std::cout << std::put_time(localtime(&now), "[%Y%m%d_%H%M%S] ");
+    time_t now = time(NULL);
+    struct tm *ltm = localtime(&now);
+    char buffer[20];
+    strftime(buffer, sizeof(buffer), "[%Y%m%d_%H%M%S] ", ltm);
+    std::cout << buffer;
 }
 
 void	Account::displayAccountsInfos(void)
