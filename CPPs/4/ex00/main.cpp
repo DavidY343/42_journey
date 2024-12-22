@@ -6,7 +6,7 @@
 /*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 21:14:05 by david             #+#    #+#             */
-/*   Updated: 2024/12/19 21:14:06 by david            ###   ########.fr       */
+/*   Updated: 2024/12/20 15:08:23 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int main()
     std::cout << "\n=== Testing Wrong Animal (No Polymorphism) ===" << std::endl;
     const WrongAnimal* wrongMeta = new WrongAnimal();
     const WrongAnimal* wrongCat = new WrongCat();
+    const WrongCat* wrongCat2 = new WrongCat();
 
     std::cout << "\nTypes:" << std::endl;
     std::cout << "wrongCat type: " << wrongCat->getType() << std::endl;
@@ -50,9 +51,11 @@ int main()
     std::cout << "\nSounds:" << std::endl;
     wrongCat->makeSound();
     wrongMeta->makeSound();
+    wrongCat2->makeSound();
 
     delete wrongMeta;
     delete wrongCat;
-
+    delete wrongCat2;
+    
     return 0;
 }

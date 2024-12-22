@@ -6,7 +6,7 @@
 /*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 21:47:41 by david             #+#    #+#             */
-/*   Updated: 2024/12/20 00:02:43 by david            ###   ########.fr       */
+/*   Updated: 2024/12/22 14:10:14 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ class ICharacter;
 
 class AMateria
 {
-protected:
+    protected:
         std::string type;
 
     public:

@@ -6,7 +6,7 @@
 /*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 21:48:18 by david             #+#    #+#             */
-/*   Updated: 2024/12/19 21:48:20 by david            ###   ########.fr       */
+/*   Updated: 2024/12/20 15:03:09 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 #include "AMateria.hpp"
 
-class IMateriaSource {
+class IMateriaSource
+{
 public:
     virtual ~IMateriaSource() {}
     virtual void learnMateria(AMateria*) = 0;

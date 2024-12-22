@@ -6,7 +6,7 @@
 /*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 21:14:57 by david             #+#    #+#             */
-/*   Updated: 2024/12/19 21:14:57 by david            ###   ########.fr       */
+/*   Updated: 2024/12/22 14:07:21 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,14 @@ int main()
         delete animals[i];
     }
 
+    std::cout << "\n=== Testing Copy Constructor ===" << std::endl;
+    Dog basic;
+
+    basic.setIdea(0, "I want to chase balls!");
+    {
+        Dog tmp = basic;
+        tmp.setIdea(0, "I want to sleep!");
+    }
+    std::cout << basic.getIdea(0) << std::endl;
     return 0;
 }
