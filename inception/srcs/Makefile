@@ -3,15 +3,6 @@
 #.SILENT:clean to silence an instruction #
 ##########################################
 
-######################
-#     Variables      #
-######################
-
-CC = cc
-RM = rm -f
-CFLAGS = -Wall -Wextra -Werror
-NAME = so_long
-
 
 ######################
 #      SOURCES       #
@@ -34,10 +25,10 @@ NO_COLOR                        =       \033[0m
 all: up
 
 up:
-	docker compose -f srcs/docker-compose.yml --env-file srcs/.env up --build -d
+	sudo docker-compose -f docker-compose.yaml --env-file .env up --build -d
 
 down:
-	docker compose -f srcs/docker-compose.yml --env-file srcs/.env down
+	sudo docker-compose -f docker-compose.yaml --env-file .env down
 
 re: down up
 

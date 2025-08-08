@@ -10,7 +10,7 @@ done
 # Copiar wp-config si no existe
 if [ ! -f /var/www/html/wp-config.php ]; then
   echo "Creating wp-config.php..."
-  cp /var/www/html/wordpress/wp-config-sample.php /var/www/html/wp-config.php
+  cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
 
   sed -i "s/database_name_here/${MYSQL_DATABASE}/" /var/www/html/wp-config.php
   sed -i "s/username_here/${MYSQL_USER}/" /var/www/html/wp-config.php
