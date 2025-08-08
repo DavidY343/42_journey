@@ -1,33 +1,41 @@
 # My 42 Madrid Journey
 
-Welcome to the summary of my 42 Madrid journey! Below is an overview of each project I tackled during the program, highlighting the key skills and lessons I learned along the way.
+A snapshot of my adventure at 42 Madrid—exploring from low-level C fundamentals to graphics, networking, and system deployment. Below you'll find a summary of each project and the key skills I gained.
 
 ## Projects Overview
 
-- **libft** – The foundational project where I reimplemented a selection of standard C library functions (like `ft_strlen`, `ft_memcpy`, and more) from scratch. This project helped me solidify my understanding of pointers, memory management, and writing clean, reusable code.
+- **libft** – The foundational C library: I reimplemented core C functions (`ft_strlen`, `ft_memcpy`, etc.), cementing my understanding of pointers, memory management, and writing reusable, clean code.
 
-- **ft_printf** – In this project, I created a simplified version of the standard `printf` function, supporting various format specifiers (such as `%d`, `%s`, `%x`, etc.). This taught me about variable argument lists (`va_list`), string parsing, and handling formatting flags and width/precision.
+- **ft_printf** – A custom version of `printf` with support for format specifiers (`%d`, `%s`, `%x`, etc.). Through this, I mastered `va_list`, parsing formats, and handling flags, precision, and field width.
 
-- **get_next_line** – Here, I developed a function that reads a file descriptor line by line, returning one line per call regardless of buffer size. This project enhanced my grasp of static variables, efficient buffer management, memory allocation, and edge-case handling.
+- **get_next_line** – A function that reads a file descriptor line by line, regardless of buffer size. I improved skills in memory allocation, buffer management, static variables, and edge-case handling.
 
-- **pipex** – In `pipex`, I replicated basic shell piping behavior: creating child processes, using `fork`, `execve`, and setting up pipes to pass output from one command to another. I deepened my knowledge of inter-process communication and process control.
+- **pipex** – I replicated basic shell piping: setting up processes using `fork`, using `execve`, and creating pipes to connect commands. Learned about process control and inter-process communication.
 
-- **philo** (Philosophers) – This concurrent programming challenge modeled the dining philosophers problem, demanding proper use of threads, mutexes, and synchronization to avoid deadlocks and race conditions. It improved my understanding of concurrency and thread-safe design.
+- **philo** (Dining Philosophers) – A concurrency challenge requiring threads, mutexes, and synchronization to avoid deadlocks and race conditions—boosting my understanding of thread-safe programming.
 
-- **push_swap** – For `push_swap`, I designed an algorithm to sort a stack of integers using a limited set of stack operations and aimed to minimize the total moves. This project sharpened my algorithmic thinking, stack manipulation, and optimizing strategies under constraints.
+- **push_swap** – A sorting challenge using only a restricted set of stack operations, aiming to minimize moves. This honed my algorithmic strategy skills and stack manipulation under constraints.
 
-- **so_long** – In this 2D game project using the MiniLibX graphics library, I built a simple maze where a player collects items and reaches an exit. I strengthened my skills in graphics rendering, event handling, game logic, and dynamic memory management for game assets.
+- **so_long** – A simple 2D game using MiniLibX where a player collects items and exits a maze. I practiced graphics rendering, event handling, game logic, and dynamic memory for assets.
 
-- **inception** – The final project where I deployed a small-scale Dockerized infrastructure, including a web server, database, and other services, to run a web application stack. I learned the basics of containerization with Docker, service orchestration, and deployment best practices.
+- **cub3d** – A lightweight 3D raycasting game engine (inspired by Wolfenstein 3D), where I learned about 3D math, raycasting algorithms, texture mapping, and real-time graphics basics in C.
+
+- **minishell** – A mini Unix shell implemented from scratch, supporting command parsing, built-ins, environment variables, and redirections. This deepened my understanding of parsing, process management, and shell internals.
+
+- **ft_irc** – A simplified version of an IRC (Internet Relay Chat) server and client in C. I tackled socket programming, networking protocols, concurrent client handling, and the basics of client-server architecture.
+
+- **piscine** – The intensive coding bootcamp that kick-started my journey. Over a month I tackled a wide range of small projects and exercises—from C basics to Linux CLI tools—building a strong foundation and learning to think algorithmically and debug effectively.
+
+- **inception** – The final capstone where I built a Dockerized infrastructure stack (web server, database, etc.) to run a web app. I mastered containerization, service orchestration, and deployment best practices.
 
 ---
 
 ## How to Navigate This Repository
 
-1. Each project folder (e.g., `libft/`, `ft_printf/`) contains its own `README.md` with build instructions, project-specific details, and usage examples.
-2. Feel free to explore the source code, test files, and your own notes to see how your skills evolved from low-level C up to system deployment.
-3. See the `inception/` directory for a real showcase of production-ready skills using Docker and service integration.
+1. Each project folder (e.g., `minishell/`, `cub3d/`) includes its own `Makefile`.
+2. Feel free to explore the source code, test cases, and your own notes to trace how your skills evolved—from low-level programming to system-level design and deployment.
+3. The `inception/` directory offers a complete Docker-based service infrastructure, showcasing integration and production-level thinking.
 
 ---
 
-Thank you for checking out my 42 Madrid journey! Feel free to dive into any project to see the evolution of skills and approach throughout the curriculum.
+Thanks for visiting my 42 Madrid journey! Feel free to explore any project to see how I grew in problem solving, system programming, and deployment through each milestone.
