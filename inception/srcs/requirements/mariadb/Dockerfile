@@ -8,4 +8,4 @@ COPY conf/my.cnf /etc/my.cnf
 
 EXPOSE 3306
 
-ENTRYPOINT ["sh", "/docker-entrypoint-initdb.d/init.sh"]
+ENTRYPOINT ["sh", "/docker-entrypoint-initdb.d/init_maria.sh"]
