@@ -1,4 +1,4 @@
-FROM alpine:3.19
+FROM alpine:3.21
 
 RUN apk update && apk add --no-cache \
     php82 php82-fpm php82-mysqli php82-curl php82-gd \
@@ -6,6 +6,8 @@ RUN apk update && apk add --no-cache \
     php82-zlib php82-dom php82-exif wget netcat-openbsd \
     curl less mariadb-client \
     php82-phar php82-cli
+
+RUN ln -s /usr/bin/php82 /usr/bin/php
 
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
     chmod +x wp-cli.phar && \
