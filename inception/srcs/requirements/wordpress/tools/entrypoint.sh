@@ -24,7 +24,7 @@ if ! wp core is-installed --path=/var/www/html --allow-root; then
     --url=${DOMAIN_NAME} \
     --title="My42Site" \
     --admin_user=${WP_ADMIN_USER} \
-    --admin_password=$(cat ${WP_ADMIN_PASSWORD_FILE}) \
+    --admin_password=${WP_ADMIN_PASSWORD} \
     --admin_email=${WP_ADMIN_EMAIL} \
     --path=/var/www/html \
     --skip-email \

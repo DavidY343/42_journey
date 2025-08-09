@@ -37,4 +37,6 @@ clean:
 
 fclean: down clean
 
+reclean: fclean up
+
 .PHONY: all up down re clean fclean
