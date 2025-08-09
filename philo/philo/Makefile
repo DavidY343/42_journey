@@ -25,6 +25,7 @@ OBJS				= 	$(DIR_PHILO:.c=.o)
 #       COLORS       #
 ######################
 
+
 RED					=	\033[91m
 YELLOW				=	\033[93m
 GREEN				=	\033[92m

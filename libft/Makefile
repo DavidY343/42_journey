@@ -16,6 +16,7 @@ INCLUDE = libft.h
 
 BONUS_NAME = .bonus
 
+
 all: $(NAME)
 
 $(NAME): $(OBJS) $(INCLUDE)
