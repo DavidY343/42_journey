@@ -1,0 +1,7 @@
+*.o
+*.gch
+.idea
+.vscode
+.DS_Store
+bureaucrat
+*_shrubbery
