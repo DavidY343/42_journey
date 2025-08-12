@@ -17,7 +17,7 @@
 int main()
 {
     Bureaucrat alice("Alice", 2);
-    Bureaucrat bob("Bob", 140);
+    Bureaucrat bob("Bob", 80);
 
     Form contract("Contract", 3, 10);
     Form report("Report", 100, 120);

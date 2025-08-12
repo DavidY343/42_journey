@@ -53,9 +53,8 @@ int main()
 
     std::cout << "----" << std::endl;
 
-    /* Test invalid construction */
     try {
-        Bureaucrat bad("Bad", 0); // invalid, should throw
+        Bureaucrat bad("Bad", 0);
         (void)bad;
     }
     catch (std::exception & e) {
@@ -63,7 +62,7 @@ int main()
     }
 
     try {
-        Bureaucrat worse("Worse", 151); // invalid, should throw
+        Bureaucrat worse("Worse", 151);
         (void)worse;
     }
     catch (std::exception & e) {

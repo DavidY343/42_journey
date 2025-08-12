@@ -18,9 +18,11 @@
 
 int main() {
     try {
-        Bureaucrat bob("Bob", 1);        // Máxima autoridad
-        Bureaucrat jim("Jim", 140);      // Casi nada de poder
-        Bureaucrat tom("Tom", 50);       // Poder intermedio
+        std::srand(std::time(0));
+        Bureaucrat bob("Bob", 1);     
+        Bureaucrat jim("Jim", 140);
+        Bureaucrat tom("Tom", 50);
+        Bureaucrat dummy("Dummy", 150);
 
         ShrubberyCreationForm shrub("home");
         RobotomyRequestForm robo("Bender");
@@ -29,8 +31,9 @@ int main() {
         std::cout << "\n--- Intento de ejecutar sin firmar ---\n";
         bob.executeForm(shrub);
 
-        std::cout << "\n--- Jim intenta firmar Shrubbery (debería fallar) ---\n";
+        std::cout << "\n--- Jim intenta firmar Shrubbery ---\n";
         jim.signForm(shrub);
+        dummy.signForm(shrub);
 
         std::cout << "\n--- Bob firma Shrubbery ---\n";
         bob.signForm(shrub);
@@ -44,7 +47,9 @@ int main() {
         std::cout << "\n--- Firmar y ejecutar Robotomy ---\n";
         bob.signForm(robo);
         bob.executeForm(robo);
-        bob.executeForm(robo); // Lo ejecuto dos veces para mostrar aleatoriedad
+        bob.executeForm(robo);
+        bob.executeForm(robo);
+        bob.executeForm(robo);
 
         std::cout << "\n--- Firmar y ejecutar Pardon ---\n";
         bob.signForm(pardon);
