@@ -57,7 +57,7 @@ int main()
 	// 	std::cerr << "Excepción: " << e.what() << std::endl;
 	// }
 
-	return 0;
+	// return 0;
 
     Array<int> numbers(MAX_VAL);
     int* mirror = new int[MAX_VAL];
