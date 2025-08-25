@@ -6,7 +6,7 @@
 #    By: david <david@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/12 19:51:48 by david             #+#    #+#              #
-#    Updated: 2025/08/13 13:06:45 by david            ###   ########.fr        #
+#    Updated: 2025/08/25 11:10:16 by david            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,13 +17,13 @@
 CC = c++
 RM = rm -f
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98
-NAME = mutant
+NAME = PmergeMe
 
 ######################
 #      SOURCES       #
 ######################
 
-NAMES	= main
+NAMES	= main PmergeMe
 SRC = $(addsuffix .cpp, $(NAMES))
 OBJ = $(SRC:.cpp=.o)
 
